@@ -1,5 +1,7 @@
 package main.modeles;
 
+import java.util.Random;
+
 public class Tresor extends Entite {
     private String nom;
     private int valeur;
@@ -24,5 +26,23 @@ public class Tresor extends Entite {
 
     public void setValeur(int valeur) {
         this.valeur = valeur;
+    }
+
+    public static Tresor genereTresor(int num, Toigon toigon) {
+        Random ran = new Random();
+        String nom = "";
+        int valeur = 0;
+
+        switch(ran.nextInt(2)) {
+            case 0:
+                nom = "Bourse";
+                valeur = ran.nextInt(0, 500);
+                break;
+            case 1:
+                nom = "Bijou";
+                valeur = 500;
+                break;
+        }
+        return new Tresor(num, toigon, nom, valeur);
     }
 }

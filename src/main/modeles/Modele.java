@@ -81,17 +81,22 @@ public class Modele {
         // On garde un numero unique à chaque trésor.
         int numTresor = 0;
 
-        for(int j = 0; j < NB_WAGONS; j++) {
+        // Il n'y a pas de passagers dans la locomotive, donc on s'arrête un wagon avant.
+        for(int j = 0; j < NB_WAGONS-1; j++) {
             // On determine l'indice du toigon du bas du wagon j.
             int indiceToigon = 2*j;
             int nombreTresors = 1 + new Random().nextInt(NB_TRESORS_WAGON - 1);
 
             for (int i = 0; i < nombreTresors; i++) {
-                Tresor tresor = new Tresor(numTresor, this.train[indiceToigon], "Bijoux", 500);
-                this.train[indiceToigon].ajouteEntite(tresor);
+                this.train[indiceToigon].ajouteEntite(Tresor.genereTresor(numTresor, this.train[indiceToigon]));
                 numTresor++;
             }
         }
+
+        // Ajoute le magot de $1000 dans la locomotive.
+        Toigon locomotive = this.getLocomotive();
+        Tresor tresor = new Tresor(numTresor, locomotive, "Magot", 1000);
+        locomotive.ajouteEntite(tresor);
     }
 
     public Toigon[] getTrain() {
