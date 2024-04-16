@@ -7,8 +7,8 @@ public class Bandit extends Entite {
     private int nombreBalles;
     private ArrayList<Tresor> tresors;
 
-    public Bandit(Toigon toigon, String nom) {
-        super(toigon, Entite.Type.BANDIT);
+    public Bandit(int num, Toigon toigon, String nom) {
+        super(num, toigon, Entite.Type.BANDIT);
         this.nom = nom;
         this.nombreBalles = 10;
         this.tresors = new ArrayList<>();

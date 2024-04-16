@@ -4,8 +4,8 @@ public class Tresor extends Entite {
     private String nom;
     private int valeur;
 
-    public Tresor(Toigon toigon, String nom, int valeur) {
-        super(toigon, Entite.Type.TRESOR);
+    public Tresor(int num, Toigon toigon, String nom, int valeur) {
+        super(num, toigon, Entite.Type.TRESOR);
         this.nom = nom;
         this.valeur = valeur;
     }

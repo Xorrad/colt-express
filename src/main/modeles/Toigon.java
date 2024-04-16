@@ -27,6 +27,10 @@ public class Toigon {
         return estToit;
     }
 
+    public boolean estLocomotive() {
+        return this.numero == 2*Modele.NB_WAGONS-2;
+    }
+
     public void ajouteEntite(Entite entite) {
         this.entites.get(entite.getType()).add(entite);
     }
