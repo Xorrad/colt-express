@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 // La classe du modèle qui contient tout le code relatif à la logique et système.
-public class Modele {
+public class Modele extends Observable {
 
     // Constantes globales.
     public static final int NB_WAGONS = 3; // Nombre de "wagon" dans un train (donc la moitié des toigons).
@@ -37,7 +37,7 @@ public class Modele {
         // Donc mettre les wagons par pair de deux.
 
         // On s'arrête avant le dernier toit car le dernier toigon est la locomotive.
-        for (int i = 0; i < 2*NB_WAGONS-1; i++){
+        for(int i = 0; i < 2*NB_WAGONS-1; i++) {
             this.train[i] = new Toigon(i, i%2 == 1);
 
             // Ajoute les voisins à chaque toigons en suivant le schéma d'indices:
