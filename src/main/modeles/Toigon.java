@@ -45,6 +45,10 @@ public class Toigon {
         return this.entites.get(entite.getType()).contains(entite);
     }
 
+    public <T> ArrayList<T> getEntites(Entite.Type type) {
+        return (ArrayList<T>) this.entites.get(type);
+    }
+
     public Toigon getVoisin(Direction dir) {
         if(!this.voisins.containsKey(dir))
             return null;
