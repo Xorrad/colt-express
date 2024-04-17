@@ -1,5 +1,7 @@
 package main.modeles;
 
+import main.modeles.entites.Entite;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 

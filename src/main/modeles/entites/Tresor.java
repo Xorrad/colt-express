@@ -1,4 +1,6 @@
-package main.modeles;
+package main.modeles.entites;
+
+import main.modeles.Toigon;
 
 import java.util.Random;
 

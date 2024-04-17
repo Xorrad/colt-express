@@ -1,6 +1,9 @@
 package main.modeles;
 
-import java.util.ArrayList;
+import main.modeles.entites.Bandit;
+import main.modeles.entites.Sheriff;
+import main.modeles.entites.Tresor;
+
 import java.util.HashMap;
 import java.util.Random;
 

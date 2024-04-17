@@ -1,4 +1,6 @@
-package main.modeles;
+package main.modeles.entites;
+
+import main.modeles.Toigon;
 
 // Classe abstraite pour les Bandits, Sheriffs et Tresors.
 public abstract class Entite {
