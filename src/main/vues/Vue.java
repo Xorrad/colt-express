@@ -3,13 +3,12 @@ package main.vues;
 import main.modeles.Modele;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class Vue implements Observer {
     private Modele modele;
     private JFrame frame;
     private VueTrain vueTrain;
-    private VueBandit vueBandit;
+    private VueCommandes vueCommandes;
 
     public Vue(Modele modele) {
         this.modele = modele;
@@ -23,19 +22,23 @@ public class Vue implements Observer {
         // Initialise et ajoute les différentes vues.
         this.vueTrain = new VueTrain(modele);
         this.frame.add(this.vueTrain);
-        this.vueBandit = new VueBandit(modele, modele.getTourBandit());
-        this.frame.add(this.vueBandit);
+        this.vueCommandes = new VueCommandes(modele, modele.getTourBandit());
+        this.frame.add(this.vueCommandes);
 
         this.frame.setVisible(true);
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.pack(); // Ajuste la taille de la fenêtre en fonction du contenu.
     }
 
+    public void updateVueCommandes() {
+        this.frame.remove(this.vueCommandes);
+        this.vueCommandes = new VueCommandes(modele, modele.getTourBandit());
+        this.frame.add(this.vueCommandes);
+    }
+
     @Override
     public void update() {
-        this.frame.remove(this.vueBandit);
-        this.vueBandit = new VueBandit(modele, modele.getTourBandit());
-        this.frame.add(this.vueBandit);
+        this.updateVueCommandes();
         this.frame.validate();
         this.frame.repaint();
     }

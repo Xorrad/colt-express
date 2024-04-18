@@ -11,11 +11,11 @@ import main.modeles.entites.Bandit;
 
 import javax.swing.*;
 
-public class VueBandit extends JPanel implements Observer {
+public class VueCommandes extends JPanel implements Observer {
     private Modele modele;
     private Bandit bandit;
 
-    public VueBandit(Modele modele, Bandit bandit) {
+    public VueCommandes(Modele modele, Bandit bandit) {
         this.modele = modele;
         this.bandit = bandit;
 
