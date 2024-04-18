@@ -39,7 +39,9 @@ public class Bandit extends Entite {
     }
 
     public int getSommeTresor() {
-        return 0;
+        return this.tresors.stream()
+                .mapToInt(tresor -> tresor.getValeur())
+                .sum();
     }
 
     public void ajouteTresor(Tresor tresor) {
