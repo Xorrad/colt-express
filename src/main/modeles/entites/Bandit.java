@@ -57,6 +57,31 @@ public class Bandit extends Entite {
         tresor.getToigon().ajouteEntite(tresor);
     }
 
+    public boolean contientAction(Action action) {
+        return this.actions.contains(action);
+    }
+
+    public void ajouteAction(Action action) {
+        this.actions.add(action);
+    }
+
+    public void retireAction(Action action) {
+        this.actions.remove(action);
+    }
+
+    public Stack<Action> getActions() {
+        return this.actions;
+    }
+
+    public int getNombreActions() {
+        return this.actions.size();
+    }
+
+    public void joueAction() {
+        this.actions.get(0).apply();
+        this.actions.remove(0);
+    }
+
     @Override
     public void deplace(Direction dir) {
         super.deplace(dir);

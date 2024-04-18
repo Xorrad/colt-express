@@ -9,6 +9,10 @@ public abstract class Action {
         this.bandit = bandit;
     }
 
+    public Bandit getBandit() {
+        return bandit;
+    }
+
     public abstract void apply();
     public abstract boolean canApply();
 }

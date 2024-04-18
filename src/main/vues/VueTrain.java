@@ -21,7 +21,7 @@ public class VueTrain extends JPanel implements Observer {
         this.modele = modele;
         this.modele.ajouteObserver(this);
 
-        Dimension dim = new Dimension((LARGEUR_WAGON+MARGE_WAGON)*Modele.NB_WAGONS, 2*HAUTEUR_WAGON);
+        Dimension dim = new Dimension((LARGEUR_WAGON+MARGE_WAGON)*Modele.NB_WAGONS + 10, 2*HAUTEUR_WAGON + 10);
         this.setPreferredSize(dim);
     }
 
@@ -43,12 +43,13 @@ public class VueTrain extends JPanel implements Observer {
         g.setColor(Color.BLACK);
         if(toigon.estToit())
             g.setColor(Color.RED);
-        g.fillRect(x, y, LARGEUR_WAGON, HAUTEUR_WAGON);
+        g.drawRect(x, y, LARGEUR_WAGON, HAUTEUR_WAGON);
 
         // Dessine des cercles pour les bandits
         ArrayList<Bandit> bandits = toigon.getEntites(Entite.Type.BANDIT);
         for(int i = 0; i < bandits.size(); i++) {
-            g.setColor(Color.GREEN);
+            //g.setColor(Color.GREEN);
+            g.setColor(Color.getHSBColor(((float) bandits.get(i).getNum() / (float) Modele.NB_BANDITS), 1, 1));
             g.fillOval(x + i*20, y + HAUTEUR_WAGON/2, 20, 20);
         }
 
@@ -56,7 +57,7 @@ public class VueTrain extends JPanel implements Observer {
         ArrayList<Sheriff> sheriffs = toigon.getEntites(Entite.Type.SHERIFF);
         for(int i = 0; i < sheriffs.size(); i++) {
             g.setColor(Color.YELLOW);
-            g.fillOval(x + LARGEUR_WAGON - (i+1)*30, y + HAUTEUR_WAGON/2 - 15, 30, 30);
+            g.fillRect(x + LARGEUR_WAGON - (i+1)*30, y + HAUTEUR_WAGON/2 - 15, 30, 30);
         }
     }
 }

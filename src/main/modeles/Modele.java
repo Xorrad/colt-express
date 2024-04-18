@@ -4,6 +4,7 @@ import main.modeles.entites.Bandit;
 import main.modeles.entites.Sheriff;
 import main.modeles.entites.Tresor;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -19,6 +20,8 @@ public class Modele extends Observable {
     private Toigon[] train; // Tableau qui contient les toigons qui constituent le train, ya pas encore de locomotive.
     private HashMap<Integer, Bandit> bandits;
     private HashMap<Integer, Sheriff> sheriffs;
+
+    private int tourNumBandit;
 
     public Modele(){
         this.initTrain();
@@ -60,6 +63,7 @@ public class Modele extends Observable {
 
     private void initBandits() {
         this.bandits = new HashMap<>();
+        this.tourNumBandit = 0;
 
         for(int i = 0; i < NB_BANDITS; i++) {
             int indiceToigon = i % this.train.length;
@@ -118,5 +122,42 @@ public class Modele extends Observable {
         if(indice >= this.train.length)
             throw new IllegalArgumentException("l'indice de toigon " + indice + " n'existe pas");
         return this.train[indice];
+    }
+
+    public Bandit getTourBandit() {
+        return this.bandits.get(this.tourNumBandit);
+    }
+
+    // Passe au bandit suivant (pour la selection des actions).
+    public void avanceTour() {
+        this.tourNumBandit++;
+
+        if(this.tourNumBandit == NB_BANDITS) {
+            this.tourNumBandit = 0;
+            this.finTour();
+        }
+
+        this.notifyObservers();
+    }
+
+    // Fin du tour -> joue les actions des bandits, déplace sheriff...
+    public void finTour() {
+        System.out.println("La selection des actions est terminée.");
+
+        boolean resteAction = true;
+        int i = 0;
+        while(resteAction) {
+            resteAction = false;
+            System.out.println("Applique les " + i + "eme actions");
+            for(Bandit bandit : this.bandits.values()) {
+                if(bandit.getNombreActions() > 0) {
+                    resteAction = true;
+                    bandit.joueAction();
+                }
+            }
+            i++;
+        }
+
+        System.out.println("Un nouveau tour débute.");
     }
 }
