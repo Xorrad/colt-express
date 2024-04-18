@@ -6,7 +6,8 @@ import main.modeles.entites.Bandit;
 public class TireAction extends Action {
     private Direction dir;
 
-    public TireAction(Direction dir) {
+    public TireAction(Bandit bandit, Direction dir) {
+        super(bandit);
         this.dir = dir;
     }
 
@@ -15,7 +16,12 @@ public class TireAction extends Action {
     }
 
     @Override
-    public void apply(Bandit bandit) {
-        
+    public void apply() {
+
+    }
+
+    @Override
+    public boolean canApply() {
+        return false;
     }
 }

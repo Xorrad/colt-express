@@ -4,6 +4,7 @@ import main.modeles.entites.Entite;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class Toigon {
     private int numero;
@@ -41,12 +42,22 @@ public class Toigon {
         this.entites.get(entite.getType()).remove(entite);
     }
 
+    public void retireEntites(Entite.Type type) {
+        this.entites.get(type).clear();
+    }
+
     public boolean contientEntite(Entite entite) {
         return this.entites.get(entite.getType()).contains(entite);
     }
 
     public <T> ArrayList<T> getEntites(Entite.Type type) {
         return (ArrayList<T>) this.entites.get(type);
+    }
+
+    public <T> T getRandomEntite(Entite.Type type) {
+        // Peut lever une exception s'il n'y a aucune entité de ce type.
+        int n = new Random().nextInt(this.entites.get(type).size());
+        return (T) this.entites.get(type).get(n);
     }
 
     public Toigon getVoisin(Direction dir) {

@@ -1,5 +1,6 @@
 package main.modeles.entites;
 
+import main.modeles.Direction;
 import main.modeles.Toigon;
 
 // Classe abstraite pour les Bandits, Sheriffs et Tresors.
@@ -28,6 +29,18 @@ public abstract class Entite {
 
     public Type getType() {
         return type;
+    }
+
+    public boolean peutDeplacer(Direction dir) {
+        return this.toigon.getVoisin(dir) != null;
+    }
+
+    public void deplace(Direction dir) {
+        if(!this.peutDeplacer(dir))
+            throw new RuntimeException("Aucun toigon displonible dans la direction " + dir.name());
+        this.toigon.retireEntite(this);
+        this.toigon = this.toigon.getVoisin(dir);
+        this.toigon.ajouteEntite(this);
     }
 
     public enum Type {
