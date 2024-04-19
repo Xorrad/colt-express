@@ -49,7 +49,7 @@ public class VueTrain extends JPanel implements Observer {
         ArrayList<Bandit> bandits = toigon.getEntites(Entite.Type.BANDIT);
         for(int i = 0; i < bandits.size(); i++) {
             //g.setColor(Color.GREEN);
-            g.setColor(Color.getHSBColor(((float) bandits.get(i).getNum() / (float) Modele.NB_BANDITS), 1, 1));
+            g.setColor(bandits.get(i).getColor());
             g.fillOval(x + i*20, y + HAUTEUR_WAGON/2, 20, 20);
         }
 

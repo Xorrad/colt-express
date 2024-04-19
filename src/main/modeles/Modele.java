@@ -124,6 +124,14 @@ public class Modele extends Observable {
         return this.train[indice];
     }
 
+    public HashMap<Integer, Sheriff> getSheriffs() {
+        return sheriffs;
+    }
+
+    public HashMap<Integer, Bandit> getBandits() {
+        return bandits;
+    }
+
     public Bandit getTourBandit() {
         return this.bandits.get(this.tourNumBandit);
     }

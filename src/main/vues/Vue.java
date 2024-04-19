@@ -3,12 +3,15 @@ package main.vues;
 import main.modeles.Modele;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Vue implements Observer {
     private Modele modele;
     private JFrame frame;
     private VueTrain vueTrain;
     private VueCommandes vueCommandes;
+    private VueBandits vueBandits;
 
     public Vue(Modele modele) {
         this.modele = modele;
@@ -20,6 +23,8 @@ public class Vue implements Observer {
         this.frame.setLayout(new BoxLayout(this.frame.getContentPane(), BoxLayout.Y_AXIS)); // Elements l'un au dessus de l'autre
 
         // Initialise et ajoute les différentes vues.
+        this.vueBandits = new VueBandits(modele);
+        this.frame.add(this.vueBandits);
         this.vueTrain = new VueTrain(modele);
         this.frame.add(this.vueTrain);
         this.vueCommandes = new VueCommandes(modele, modele.getTourBandit());

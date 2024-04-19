@@ -1,9 +1,11 @@
 package main.modeles.entites;
 
 import main.modeles.Direction;
+import main.modeles.Modele;
 import main.modeles.Toigon;
 import main.modeles.actions.Action;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
@@ -17,7 +19,7 @@ public class Bandit extends Entite {
     public Bandit(int num, Toigon toigon, String nom) {
         super(num, toigon, Entite.Type.BANDIT);
         this.nom = nom;
-        this.nombreBalles = 10;
+        this.nombreBalles = 5;
         this.tresors = new ArrayList<>();
         this.actions = new Stack<Action>();
     }
@@ -82,6 +84,10 @@ public class Bandit extends Entite {
     public void joueAction() {
         this.actions.get(0).apply();
         this.actions.remove(0);
+    }
+
+    public Color getColor() {
+        return Color.getHSBColor(((float) this.getNum() / (float) Modele.NB_BANDITS), 1, 1);
     }
 
     @Override
