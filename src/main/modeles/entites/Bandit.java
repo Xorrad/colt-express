@@ -4,8 +4,10 @@ import main.modeles.Direction;
 import main.modeles.Modele;
 import main.modeles.Toigon;
 import main.modeles.actions.Action;
+import main.vues.Assets;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
@@ -15,6 +17,7 @@ public class Bandit extends Entite {
     private int nombreBalles;
     private ArrayList<Tresor> tresors;
     private Stack<Action> actions;
+    private BufferedImage image;
 
     public Bandit(int num, Toigon toigon, String nom) {
         super(num, toigon, Entite.Type.BANDIT);
@@ -22,6 +25,44 @@ public class Bandit extends Entite {
         this.nombreBalles = 5;
         this.tresors = new ArrayList<>();
         this.actions = new Stack<Action>();
+        this.initImage();
+    }
+
+    private void initImage() {
+        if(Assets.IMG_BANDIT == null) {
+            this.image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+            return;
+        }
+
+        // Fait une copie profonde de l'image de bandit.
+        this.image = new BufferedImage(Assets.IMG_BANDIT.getWidth(), Assets.IMG_BANDIT.getHeight(), Assets.IMG_BANDIT.getType());
+        Graphics2D g2d = this.image.createGraphics();
+        g2d.drawImage(Assets.IMG_BANDIT, 0, 0, null);
+        g2d.dispose();
+
+        Color c = getColor();
+        int darkness = 60;
+
+        // Change la couleur du blanc.
+        for (int x = 0; x < this.image.getWidth(); x++) {
+            for (int y = 0; y < this.image.getHeight(); y++) {
+                int rgb = this.image.getRGB(x, y);
+                Color color = new Color(rgb, true);
+                if(color.getRed() < 200 || color.getGreen() < 200 || color.getBlue() < 200)
+                    continue;
+                Color newColor = new Color(
+                        Math.max((c.getRed()+color.getRed())/2 - darkness, 0),
+                        Math.max((c.getGreen()+color.getGreen())/2 - darkness, 0),
+                        Math.max((c.getBlue()+color.getBlue())/2 - darkness, 0),
+                        color.getAlpha()
+                );
+                this.image.setRGB(x, y, newColor.getRGB());
+            }
+        }
+    }
+
+    public BufferedImage getImage() {
+        return image;
     }
 
     public String getNom() {

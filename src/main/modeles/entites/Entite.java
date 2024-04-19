@@ -36,8 +36,10 @@ public abstract class Entite {
     }
 
     public void deplace(Direction dir) {
-        if(!this.peutDeplacer(dir))
-            throw new RuntimeException("Aucun toigon displonible dans la direction " + dir.name());
+        if(!this.peutDeplacer(dir)) {
+            //throw new RuntimeException("Aucun toigon displonible dans la direction " + dir.name());
+            return;
+        }
         this.toigon.retireEntite(this);
         this.toigon = this.toigon.getVoisin(dir);
         this.toigon.ajouteEntite(this);

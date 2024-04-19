@@ -12,7 +12,7 @@ public class VueBackground extends JImage {
         super(image);
         this.offset = 0;
 
-        Timer timer = new Timer(40, new ActionListener() {
+        Timer timer = new Timer(25, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Max pour éviter la division par 0 à la première itération.
@@ -25,8 +25,6 @@ public class VueBackground extends JImage {
 
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
         g.drawImage(getImage(), this.offset + getWidth(), 0, getWidth(), getHeight(), this);
         g.drawImage(getImage(), this.offset + 1, 0, getWidth(), getHeight(), this);
     }

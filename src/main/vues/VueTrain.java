@@ -30,16 +30,15 @@ public class VueTrain extends JPanel implements Observer {
         repaint();
     }
 
+    @Override
     public void paintComponent(Graphics g) {
-        super.repaint();
-
         for(int i = 0; i < this.modele.getNombreToigons(); i++) {
             Toigon toigon = this.modele.getToigon(i);
-            paint(g, toigon, (i/2)*(LARGEUR_WAGON+MARGE_WAGON), ((i+1)%2)*HAUTEUR_WAGON);
+            paintToigon(g, toigon, (i/2)*(LARGEUR_WAGON+MARGE_WAGON), (int) (0.9*getHeight()) - (1 + (i%2))*HAUTEUR_WAGON);
         }
     }
 
-    private void paint(Graphics g, Toigon toigon, int x, int y) {
+    private void paintToigon(Graphics g, Toigon toigon, int x, int y) {
         g.setColor(Color.BLACK);
         if(toigon.estToit())
             g.setColor(Color.RED);
@@ -50,7 +49,8 @@ public class VueTrain extends JPanel implements Observer {
         for(int i = 0; i < bandits.size(); i++) {
             //g.setColor(Color.GREEN);
             g.setColor(bandits.get(i).getColor());
-            g.fillOval(x + i*20, y + HAUTEUR_WAGON/2, 20, 20);
+            g.drawImage(bandits.get(i).getImage(), x + i*42 + 2, y + 8, 40, 40, this);
+            //g.fillOval(x + i*20, y + HAUTEUR_WAGON/2, 20, 20);
         }
 
         // Dessine des cercles pour les bandits

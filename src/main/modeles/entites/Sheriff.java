@@ -18,26 +18,16 @@ public class Sheriff extends Entite {
         return nom;
     }
 
-    //@Override
-    public void deplace(){
+    public void joue(){
         if (Math.random()<this.NERVOSITE_SHERIFF){
-            if (Math.random()<0.5){
-                super.deplace(Direction.AVANT);
-            }
-            else{
-                super.deplace((Direction.ARRIERE));
-            }
+            this.deplace(Math.random() <= 0.5 ? Direction.ARRIERE : Direction.AVANT);
             ArrayList<Bandit> bandits = this.getToigon().getEntites(Entite.Type.BANDIT);
             for(int i = 0; i < bandits.size(); i++) {
-                //g.setColor(Color.GREEN);
                 if (!bandits.get(i).getToigon().estToit()){
                     bandits.get(i).deposeRandomTresor();
                     bandits.get(i).deplace(Direction.HAUT);
                 }
-
-
             }
-
         }
     }
 
