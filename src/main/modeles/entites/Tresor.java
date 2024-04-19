@@ -38,7 +38,7 @@ public class Tresor extends Entite {
         switch(ran.nextInt(2)) {
             case 0:
                 nom = "Bourse";
-                valeur = ran.nextInt(0, 500);
+                valeur = ran.nextInt( 500);
                 break;
             case 1:
                 nom = "Bijou";
