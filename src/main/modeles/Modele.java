@@ -161,6 +161,7 @@ public class Modele extends Observable {
                 if(bandit.getNombreActions() > 0) {
                     resteAction = true;
                     bandit.joueAction();
+                    this.sheriffs.forEach((num, sheriff) -> sheriff.joue());
                 }
             }
             i++;
