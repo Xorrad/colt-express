@@ -39,6 +39,6 @@ public class TireAction extends Action {
     @Override
     public boolean canApply(){
 
-        return (this.bandit.getNombreBalles()>0 & this.bandit.getToigon().getVoisin(this.dir)!=null);
+        return (this.bandit.getNombreBalles()>0 && this.bandit.getToigon().getVoisin(this.dir)!=null);
     }
 }
