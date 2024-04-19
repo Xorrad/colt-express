@@ -49,7 +49,8 @@ public class VueTrain extends JPanel implements Observer {
         for(int i = 0; i < bandits.size(); i++) {
             //g.setColor(Color.GREEN);
             g.setColor(bandits.get(i).getColor());
-            g.fillOval(x + i*20, y + HAUTEUR_WAGON/2, 20, 20);
+            g.drawImage(bandits.get(i).getImage(), x + i*42 + 2, y + 8, 40, 40, this);
+            //g.fillOval(x + i*20, y + HAUTEUR_WAGON/2, 20, 20);
         }
 
         // Dessine des cercles pour les bandits

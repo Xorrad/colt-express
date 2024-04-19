@@ -33,9 +33,10 @@ public class VueBandit extends JPanel implements Observer {
         this.modele = modele;
         this.bandit = bandit;
         this.modele.ajouteObserver(this);
+        this.setOpaque(false);
 
         // Lire https://docs.oracle.com/javase/tutorial/uiswing/layout/gridbag.html
-        this.setLayout(new GridBagLayout());
+        //this.setLayout(new GridBagLayout());
 //        GridBagConstraints c = new GridBagConstraints(
 //                0, 0, // grid x,y
 //                1, 1, // grid width,height
@@ -48,18 +49,27 @@ public class VueBandit extends JPanel implements Observer {
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
 
+        // Image de fond (cadre)
+        JImage imageCadre = new JImage(Assets.IMG_CADRE);
+        imageCadre.setLayout(new GridBagLayout());
+
         this.panelInfo = new JPanel();
+        this.panelInfo.setOpaque(false);
         this.panelActions = new JPanel();
+        this.panelActions.setOpaque(false);
 
         // Image du personnage
         this.labelImg = new JLabel("IMG");
         this.labelImg.setBorder(new EmptyBorder(PADDING/2, PADDING, PADDING/2, PADDING/2));
+        c.gridwidth = 1;
+        c.gridheight = 1;
         c.gridx = 0;
         c.gridy = 0;
-        this.add(this.labelImg, c);
+        imageCadre.add(this.labelImg, c);
 
         // Information du joueur (nom, somme, balles...)
         this.labelNom = new JLabel(bandit.getNom());
+        this.labelNom.setForeground(bandit.getColor());
         this.panelInfo.add(this.labelNom);
 
         this.labelSomme = new JLabel("$" + bandit.getSommeTresor());
@@ -69,23 +79,20 @@ public class VueBandit extends JPanel implements Observer {
         this.panelInfo.add(this.labelBalles);
 
         this.panelInfo.setLayout(new BoxLayout(this.panelInfo, BoxLayout.Y_AXIS)); // Elements l'un au dessus de l'autre
-        this.panelInfo.setBorder(new EmptyBorder(PADDING/2, PADDING/2, PADDING/2, PADDING));
+        this.panelInfo.setBorder(new EmptyBorder(PADDING, PADDING/2, PADDING/2, PADDING));
         c.gridx = 1;
         c.gridy = 0;
-        this.add(this.panelInfo, c);
+        imageCadre.add(this.panelInfo, c);
 
         // Actions du joueur
-        //this.panelActions.add();
-        this.panelActions.setBorder(BorderFactory.createCompoundBorder(
-                new MatteBorder(2, 0, 0, 0, this.bandit.getColor()),
-                new EmptyBorder(PADDING/2, PADDING, PADDING/2, PADDING))
-        );
+//        this.panelActions.add();
+        this.panelActions.setBorder(new EmptyBorder(PADDING/2, PADDING, PADDING/2, PADDING));
         c.gridx = 0;
         c.gridy = 1;
         c.gridwidth = 2;
-        this.add(this.panelActions, c);
+        imageCadre.add(this.panelActions, c);
 
-        this.setBorder(new MatteBorder(2, 2, 2, 2, this.bandit.getColor()));
+        this.add(imageCadre);
     }
 
     @Override
