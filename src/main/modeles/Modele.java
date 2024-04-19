@@ -161,6 +161,9 @@ public class Modele extends Observable {
                 if(bandit.getNombreActions() > 0) {
                     resteAction = true;
                     bandit.joueAction();
+                    for(Sheriff sheriff : this.sheriffs.values()) {//va aléatoirement déplacer chaque sheriff après chaque action de bandit
+                        sheriff.deplace();
+                    }
                 }
             }
             i++;
