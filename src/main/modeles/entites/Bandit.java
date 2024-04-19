@@ -29,6 +29,11 @@ public class Bandit extends Entite {
     }
 
     private void initImage() {
+        if(Assets.IMG_BANDIT == null) {
+            this.image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+            return;
+        }
+
         // Fait une copie profonde de l'image de bandit.
         this.image = new BufferedImage(Assets.IMG_BANDIT.getWidth(), Assets.IMG_BANDIT.getHeight(), Assets.IMG_BANDIT.getType());
         Graphics2D g2d = this.image.createGraphics();

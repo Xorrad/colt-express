@@ -21,6 +21,12 @@
         <sourceDirectory>src/main/</sourceDirectory>
         <testSourceDirectory>src/test/</testSourceDirectory>
 
+        <resources>
+            <resource>
+                <directory>src/resources/images/</directory>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
