@@ -22,7 +22,7 @@ public class TireAction extends Action {
     @Override
     public void apply() {
         if(!this.canApply()) {
-            System.out.println(this.bandit.getNom() + " veut tirer mais n'a plus de balles.");
+            System.out.println(this.bandit.getNom() + "ne peut pas tirer.");
             return;
         }
         this.bandit.setNombreBalles(this.bandit.getNombreBalles()-1);
@@ -37,5 +37,8 @@ public class TireAction extends Action {
     }
 
     @Override
-    public boolean canApply(){return this.bandit.getNombreBalles()>0;}
+    public boolean canApply(){
+
+        return (this.bandit.getNombreBalles()>0 & this.bandit.getToigon().getVoisin(this.dir)!=null);
+    }
 }
