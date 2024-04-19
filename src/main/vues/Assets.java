@@ -2,12 +2,13 @@ package main.vues;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Assets {
 
-    public static Image IMG_BG;
-    public static Image IMG_RAILS;
-    public static Image IMG_CADRE;
+    public static BufferedImage IMG_BG;
+    public static BufferedImage IMG_RAILS;
+    public static BufferedImage IMG_CADRE;
 
     public static void chargeAssets() {
         try {

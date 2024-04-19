@@ -30,16 +30,15 @@ public class VueTrain extends JPanel implements Observer {
         repaint();
     }
 
+    @Override
     public void paintComponent(Graphics g) {
-        super.repaint();
-
         for(int i = 0; i < this.modele.getNombreToigons(); i++) {
             Toigon toigon = this.modele.getToigon(i);
-            paint(g, toigon, (i/2)*(LARGEUR_WAGON+MARGE_WAGON), ((i+1)%2)*HAUTEUR_WAGON);
+            paintToigon(g, toigon, (i/2)*(LARGEUR_WAGON+MARGE_WAGON), (int) (0.9*getHeight()) - (1 + (i%2))*HAUTEUR_WAGON);
         }
     }
 
-    private void paint(Graphics g, Toigon toigon, int x, int y) {
+    private void paintToigon(Graphics g, Toigon toigon, int x, int y) {
         g.setColor(Color.BLACK);
         if(toigon.estToit())
             g.setColor(Color.RED);
