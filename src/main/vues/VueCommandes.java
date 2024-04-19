@@ -18,6 +18,7 @@ public class VueCommandes extends JPanel implements Observer {
     public VueCommandes(Modele modele, Bandit bandit) {
         this.modele = modele;
         this.bandit = bandit;
+        this.setOpaque(false);
 
         JLabel labelNom = new JLabel("Tour de " + bandit.getNom());
         this.add(labelNom);

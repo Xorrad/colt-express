@@ -47,8 +47,6 @@ public class VueBandit extends JPanel implements Observer {
 //        );
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 0;
 
         this.panelInfo = new JPanel();
         this.panelActions = new JPanel();
@@ -87,11 +85,6 @@ public class VueBandit extends JPanel implements Observer {
         c.gridwidth = 2;
         this.add(this.panelActions, c);
 
-//        this.setBorder(BorderFactory.createCompoundBorder(
-//                new MatteBorder(2, 2, 2, 2, this.bandit.getColor()),
-//                new EmptyBorder(PADDING/2, PADDING, PADDING/2, PADDING))
-//        );
-//
         this.setBorder(new MatteBorder(2, 2, 2, 2, this.bandit.getColor()));
     }
 

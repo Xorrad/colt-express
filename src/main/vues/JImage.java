@@ -17,6 +17,6 @@ public class JImage extends JComponent {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(image, 0, 0, this);
+        g.drawImage(this.image, 0, 0, getWidth(), getHeight(), this);
     }
 }
