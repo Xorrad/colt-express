@@ -123,6 +123,10 @@ public class Modele extends Observable {
 
     private void joueMusique() {
         try {
+            Clip clip2 = AudioSystem.getClip();
+            clip2.open(Assets.AUDIO_TRAIN);
+            clip2.loop(Clip.LOOP_CONTINUOUSLY);
+
             Clip clip = AudioSystem.getClip();
             clip.open(Assets.AUDIO_MUSIQUES);
             clip.loop(Clip.LOOP_CONTINUOUSLY);

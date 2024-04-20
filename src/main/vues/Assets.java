@@ -41,6 +41,7 @@ public class Assets {
 
     // Les musiques sont fusionnées dans un même flux qui est joué à l'infini.
     public static AudioInputStream AUDIO_MUSIQUES;
+    public static AudioInputStream AUDIO_TRAIN;
 
     // Initialise la table des bandits statiquement car les assets ne sont pas
     // chargés lors de l'execution des tests.
@@ -95,16 +96,19 @@ public class Assets {
                 BANDITS.put(banditName, ImageIO.read(file));
             }
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
 
     public static void chargeMusiques() {
-        loadMusique("outlaw-ride.wav");
-        loadMusique("desert-monolith.wav");
-        loadMusique("cactus-train.wav");
-        loadMusique("desert-monolith.wav");
+        ajouteMusique("desert-monolith.wav");
+        ajouteMusique("outlaw-ride.wav");
+        ajouteMusique("desert-monolith.wav");
+        ajouteMusique("cactus-train.wav");
+
+        AUDIO_TRAIN = loadSound("train.wav");
     }
 
     public static BufferedImage loadImage(String nom) throws IOException {
@@ -118,11 +122,20 @@ public class Assets {
         return font;
     }
 
-    public static void loadMusique(String nom) {
+    public static AudioInputStream loadSound(String nom) {
+        try {
+            return AudioSystem.getAudioInputStream(Assets.class.getResource("/resources/musics/" + nom));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void ajouteMusique(String nom) {
         try {
             // On charge le fichier audio dans un flux
             // puis on ajoute ce flux à la bande de musique existante.
-            AudioInputStream flux = AudioSystem.getAudioInputStream(Assets.class.getResource("/resources/musics/" + nom));
+            AudioInputStream flux = loadSound(nom);
 
             if(AUDIO_MUSIQUES == null) {
                 AUDIO_MUSIQUES = flux;
