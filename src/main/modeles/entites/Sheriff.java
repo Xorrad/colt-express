@@ -20,7 +20,19 @@ public class Sheriff extends Entite {
 
     public void joue(){
         if (Math.random() < Modele.NERVOSITE_SHERIFF){
-            this.deplace(Math.random() <= 0.5 ? Direction.ARRIERE : Direction.AVANT);
+            Direction dir = (Math.random() <= 0.5 ? Direction.ARRIERE : Direction.AVANT);
+            if (dir == Direction.AVANT && this.getToigon().getVoisin(dir) == null) {
+                this.deplace(Direction.ARRIERE);
+            }
+            else if (dir == Direction.ARRIERE && this.getToigon().getVoisin(dir) == null) {
+            this.deplace(Direction.AVANT);
+            }
+            else {
+                this.deplace(dir);
+            }
+
+
+            //this.deplace(Math.random() <= 0.5 ? Direction.ARRIERE : Direction.AVANT);
             System.out.println("le Shériff se déplace.");
             // On fait une copie de la liste car elle est modifiée lorsqu'on déplace un bandit sur le toit.
             ArrayList<Bandit> bandits = new ArrayList<>(this.getToigon().getEntites(Entite.Type.BANDIT));
