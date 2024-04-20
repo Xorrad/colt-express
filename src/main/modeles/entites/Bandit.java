@@ -95,11 +95,16 @@ public class Bandit extends Entite {
         this.tresors.remove(tresor);
     }
 
-    public void deposeRandomTresor() {
+    public boolean possedeTresor(){//System.out.println(this.tresors.size());
+        return !this.tresors.isEmpty();}
+
+    public Tresor deposeRandomTresor() {
+        if (!this.possedeTresor()){return null;}
         int n = new Random().nextInt(this.tresors.size());
         Tresor tresor = this.tresors.get(n);
         this.retireTresor(tresor);
         tresor.getToigon().ajouteEntite(tresor);
+        return tresor;
     }
 
     public boolean contientAction(Action action) {
