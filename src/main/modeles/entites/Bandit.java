@@ -42,7 +42,7 @@ public class Bandit extends Entite {
         g2d.dispose();
 
         Color c = getColor();
-        int darkness = 60;
+        int darkness = 80;
 
         // Change la couleur du blanc.
         for (int x = 0; x < this.image.getWidth(); x++) {

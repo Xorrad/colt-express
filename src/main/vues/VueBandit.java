@@ -69,13 +69,16 @@ public class VueBandit extends JPanel implements Observer {
 
         // Information du joueur (nom, somme, balles...)
         this.labelNom = new JLabel(bandit.getNom());
-        this.labelNom.setForeground(bandit.getColor());
+        this.labelNom.setForeground(bandit.getColor().darker());
+        this.labelNom.setFont(Assets.FONT_RIOGRANDE);
         this.panelInfo.add(this.labelNom);
 
         this.labelSomme = new JLabel("$" + bandit.getSommeTresor());
+        this.labelSomme.setFont(Assets.FONT_WESTERNBANG);
         this.panelInfo.add(this.labelSomme);
 
         this.labelBalles = new JLabel(".".repeat(bandit.getNombreBalles()));
+        this.labelSomme.setFont(Assets.FONT_WESTERNBANG);
         this.panelInfo.add(this.labelBalles);
 
         this.panelInfo.setLayout(new BoxLayout(this.panelInfo, BoxLayout.Y_AXIS)); // Elements l'un au dessus de l'autre
