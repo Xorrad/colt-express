@@ -3,17 +3,17 @@ package main.modeles;
 import main.modeles.entites.Bandit;
 import main.modeles.entites.Sheriff;
 import main.modeles.entites.Tresor;
+import main.vues.Assets;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Random;
+import java.awt.image.BufferedImage;
+import java.util.*;
 
 // La classe du modèle qui contient tout le code relatif à la logique et système.
 public class Modele extends Observable {
 
     // Constantes globales.
-    public static final int NB_WAGONS = 3; // Nombre de "wagon" dans un train (donc la moitié des toigons).
-    public static final int NB_BANDITS = 5;
+    public static final int NB_WAGONS = 7; // Nombre de "wagon" dans un train (donc la moitié des toigons).
+    public static final int NB_BANDITS = 4;
     public static final int NB_SHERIFFS = 1;
     public static final int NB_TRESORS_WAGON = 5;
 
@@ -31,7 +31,7 @@ public class Modele extends Observable {
     }
 
     private void initTrain(){
-        this.train = new Toigon[2*NB_WAGONS-1];
+        this.train = new Toigon[2*NB_WAGONS];
 
         // Tristan:
         // La manière dont je visualise le train, c'est que dans un train de taille i,
@@ -42,8 +42,7 @@ public class Modele extends Observable {
         // Je pense qu'il est mieux de mettre le toigon du bas en i et celui du haut en i+1.
         // Donc mettre les wagons par pair de deux.
 
-        // On s'arrête avant le dernier toit car le dernier toigon est la locomotive.
-        for(int i = 0; i < 2*NB_WAGONS-1; i++) {
+        for(int i = 0; i < 2*NB_WAGONS; i++) {
             this.train[i] = new Toigon(i, i%2 == 1);
 
             // Ajoute les voisins à chaque toigons en suivant le schéma d'indices:
@@ -65,9 +64,21 @@ public class Modele extends Observable {
         this.bandits = new HashMap<>();
         this.tourNumBandit = 0;
 
+        // Charge la liste des noms personalisés des bandits (dans resources/images/bandits)
+        ArrayList<String> noms = new ArrayList<>();
+        noms.addAll(Assets.BANDITS.keySet());
+        Collections.shuffle(noms);
+
         for(int i = 0; i < NB_BANDITS; i++) {
             int indiceToigon = i % this.train.length;
-            Bandit bandit = new Bandit(i, this.train[indiceToigon], "Bandit " + i);
+            if(i == this.train.length-2) // Pas de bandits sur la locomotive.
+                indiceToigon = (indiceToigon+1) % this.train.length;
+
+            // Creer le bandit avec un nom (ou numéro si aucun disponible) et prend l'image associée
+            String nom = (i >= noms.size()) ? "Bandit " + i : noms.get(i % noms.size());
+            BufferedImage image = (i >= noms.size()) ? Assets.IMG_BANDIT : Assets.BANDITS.get(nom);
+            Bandit bandit = new Bandit(i, this.train[indiceToigon], nom, image);
+
             this.train[indiceToigon].ajouteEntite(bandit);
             this.bandits.put(i, bandit);
         }
@@ -111,7 +122,7 @@ public class Modele extends Observable {
     }
 
     public Toigon getLocomotive() {
-        return this.train[this.train.length-1];
+        return this.train[this.train.length-2];
     }
 
     public int getNombreToigons() {

@@ -16,9 +16,9 @@ public class ActionController extends Controller {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Je suppose qu'on ne peut faire qu'une seule fois la même action???
-        if(!this.action.getBandit().contientAction(this.action)) {
-            this.action.getBandit().ajouteAction(this.action);
-        }
+        if(this.action.getBandit().getActions().size() >= 3)
+            return;
+        this.action.getBandit().ajouteAction(this.action);
+        this.modele.notifyObservers();
     }
 }

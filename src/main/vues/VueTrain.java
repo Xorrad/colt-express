@@ -7,6 +7,7 @@ import main.modeles.entites.Entite;
 import main.modeles.entites.Sheriff;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -23,6 +24,7 @@ public class VueTrain extends JPanel implements Observer {
 
         Dimension dim = new Dimension((LARGEUR_WAGON+MARGE_WAGON)*Modele.NB_WAGONS + 10, 2*HAUTEUR_WAGON + 10);
         this.setPreferredSize(dim);
+        this.setBorder(new EmptyBorder(10, 0, 0, 0));
     }
 
     @Override
@@ -57,7 +59,8 @@ public class VueTrain extends JPanel implements Observer {
         ArrayList<Sheriff> sheriffs = toigon.getEntites(Entite.Type.SHERIFF);
         for(int i = 0; i < sheriffs.size(); i++) {
             g.setColor(Color.YELLOW);
-            g.fillRect(x + LARGEUR_WAGON - (i+1)*30, y + HAUTEUR_WAGON/2 - 15, 30, 30);
+            g.drawImage(Assets.IMG_SHERIFF, x + i*42 + 2, y + 8, 40, 40, this);
+            //g.fillRect(x + LARGEUR_WAGON - (i+1)*30, y + HAUTEUR_WAGON/2 - 15, 30, 30);
         }
     }
 }

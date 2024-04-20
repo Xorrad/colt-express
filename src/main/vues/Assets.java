@@ -3,22 +3,98 @@ package main.vues;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 
 public class Assets {
 
+    public static HashMap<String, BufferedImage> BANDITS;
+
     public static BufferedImage IMG_BG;
     public static BufferedImage IMG_CADRE;
+    public static BufferedImage IMG_BALLE;
+    public static BufferedImage IMG_TITRE;
+
     public static BufferedImage IMG_BANDIT;
+    public static BufferedImage IMG_SHERIFF;
+
+    public static BufferedImage IMG_ACTIONS_BRAQUE;
+    public static BufferedImage IMG_ACTIONS_ETAGES;
+    public static BufferedImage IMG_ACTIONS_MOVE_ARRIERE;
+    public static BufferedImage IMG_ACTIONS_MOVE_AVANT;
+    public static BufferedImage IMG_ACTIONS_TIRE_ARRIERE;
+    public static BufferedImage IMG_ACTIONS_TIRE_AVANT;
+    public static BufferedImage IMG_ACTIONS_TIRE_BAS;
+    public static BufferedImage IMG_ACTIONS_TIRE_HAUT;
+    public static BufferedImage IMG_ACTIONS_INCONNUE;
+
+    public static Font FONT_WESTERNBANG;
+    public static Font FONT_RIOGRANDE;
+
+    // Initialise la table des bandits statiquement car les assets ne sont pas
+    // chargés lors de l'execution des tests.
+    static {
+        BANDITS = new HashMap<>();
+    }
 
     public static void chargeAssets() {
+        Assets.chargeBandits();
+
         try {
-            IMG_BG = ImageIO.read(Assets.class.getResource("/resources/images/background.png"));
-            IMG_CADRE = ImageIO.read(Assets.class.getResource("/resources/images/cadre.png"));
-            IMG_BANDIT = ImageIO.read(Assets.class.getResource("/resources/images/bandit.png"));
+            IMG_BG = loadImage("background.png");
+            IMG_CADRE = loadImage("cadre.png");
+            IMG_BALLE = loadImage("balle.png");
+            IMG_TITRE = loadImage("titre.png");
+
+            IMG_BANDIT = loadImage("bandit.png");
+            IMG_SHERIFF = loadImage("sheriff.png");
+
+            IMG_ACTIONS_BRAQUE = loadImage("action_braque.png");
+            IMG_ACTIONS_ETAGES = loadImage("action_etages.png");
+            IMG_ACTIONS_MOVE_ARRIERE = loadImage("action_move_arriere.png");
+            IMG_ACTIONS_MOVE_AVANT = loadImage("action_move_avant.png");
+            IMG_ACTIONS_TIRE_ARRIERE = loadImage("action_tire_arriere.png");
+            IMG_ACTIONS_TIRE_AVANT = loadImage("action_tire_avant.png");
+            IMG_ACTIONS_TIRE_BAS = loadImage("action_tire_bas.png");
+            IMG_ACTIONS_TIRE_HAUT = loadImage("action_tire_haut.png");
+            IMG_ACTIONS_INCONNUE = loadImage("action_inconnue.png");
+
+            FONT_WESTERNBANG = loadFont("WesternBangBang-Regular.ttf");
+            FONT_RIOGRANDE = loadFont("RioGrande.ttf");
         }
         catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void chargeBandits() {
+        try {
+            File dir = new File(Assets.class.getResource("/resources/images/bandits/").getFile());
+            for (File file : dir.listFiles()) {
+                if (file.isDirectory() || !file.getName().endsWith(".png"))
+                    continue;
+                String banditName = file.getName();
+                // Capitalise la premier lettre et retire le ".png"
+                banditName = Character.toUpperCase(banditName.charAt(0)) + banditName.substring(1, banditName.length() - 4);
+                BANDITS.put(banditName, ImageIO.read(file));
+                System.out.println(banditName + " " + BANDITS.get(banditName));
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static BufferedImage loadImage(String nom) throws IOException {
+        return ImageIO.read(Assets.class.getResource("/resources/images/" + nom));
+    }
+
+    public static Font loadFont(String nom) throws IOException, FontFormatException {
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        Font font = Font.createFont(Font.TRUETYPE_FONT, Assets.class.getResource("/resources/fonts/" + nom).openStream()).deriveFont(24f);
+        ge.registerFont(font);
+        return font;
     }
 
 }
