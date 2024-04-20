@@ -21,12 +21,6 @@ public class ChangeEtageAction extends Action {
 
     @Override
     public void apply() {
-        if(!this.canApply()) {
-            System.out.println(this.bandit.getNom() + " ne peut pas changer d'étage sur la locomotive.");
-            return;
-        }
-        //throw new RuntimeException(this.bandit.getNom() + " ne peut pas changer d'étage sur la locomotive.");
-
         if(this.bandit.getToigon().estToit()) {
             this.bandit.deplace(Direction.BAS);
             System.out.println(this.bandit.getNom() + " entre dans le wagon.");
@@ -39,6 +33,6 @@ public class ChangeEtageAction extends Action {
 
     @Override
     public boolean canApply() {
-        return !this.bandit.getToigon().estLocomotive();
+        return true;
     }
 }

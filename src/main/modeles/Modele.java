@@ -15,7 +15,7 @@ import java.util.*;
 public class Modele extends Observable {
 
     // Constantes globales.
-    public static final int NB_WAGONS = 7; // Nombre de "wagon" dans un train (donc la moitié des toigons).
+    public static final int NB_WAGONS = 6; // Nombre de "wagon" dans un train (donc la moitié des toigons).
     public static final int NB_BANDITS = 4;
     public static final int NB_SHERIFFS = 1;
     public static final int NB_TRESORS_WAGON = 5;

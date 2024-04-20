@@ -20,6 +20,8 @@ public class Assets {
     public static BufferedImage IMG_CADRE;
     public static BufferedImage IMG_BALLE;
     public static BufferedImage IMG_TITRE;
+    public static BufferedImage IMG_WAGON;
+    public static BufferedImage IMG_LOCOMOTIVE;
 
     public static BufferedImage IMG_BANDIT;
     public static BufferedImage IMG_SHERIFF;
@@ -56,6 +58,9 @@ public class Assets {
             IMG_CADRE = loadImage("cadre.png");
             IMG_BALLE = loadImage("balle.png");
             IMG_TITRE = loadImage("titre.png");
+
+            IMG_WAGON = loadImage("wagon.png");
+            IMG_LOCOMOTIVE = loadImage("locomotive.png");
 
             IMG_BANDIT = loadImage("bandit.png");
             IMG_SHERIFF = loadImage("sheriff.png");
