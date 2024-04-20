@@ -4,6 +4,7 @@ import main.modeles.Modele;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.*;
 
 public class Vue implements Observer {
 
@@ -20,6 +21,7 @@ public class Vue implements Observer {
         this.frame = new JFrame();
         this.frame.setTitle("Colt Express");
         this.frame.setLayout(new BoxLayout(this.frame.getContentPane(), BoxLayout.Y_AXIS)); // Elements l'un au dessus de l'autre
+        this.frame.setBackground(new Color(248, 248, 132));
 
         // Les components sont structurés de la façon suivante:
         // JFrame:

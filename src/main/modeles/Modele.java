@@ -12,7 +12,7 @@ import java.util.Random;
 public class Modele extends Observable {
 
     // Constantes globales.
-    public static final int NB_WAGONS = 3; // Nombre de "wagon" dans un train (donc la moitié des toigons).
+    public static final int NB_WAGONS = 7; // Nombre de "wagon" dans un train (donc la moitié des toigons).
     public static final int NB_BANDITS = 5;
     public static final int NB_SHERIFFS = 1;
     public static final int NB_TRESORS_WAGON = 5;
