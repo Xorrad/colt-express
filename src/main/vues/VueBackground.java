@@ -5,11 +5,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class VueBackground extends JImage {
+public class VueBackground extends JComponent {
+    private Image image;
     private int offset;
 
     public VueBackground(Image image) {
-        super(image);
+        this.image = image;
         this.offset = 0;
 
         Timer timer = new Timer(25, new ActionListener() {
@@ -25,7 +26,12 @@ public class VueBackground extends JImage {
 
     @Override
     protected void paintComponent(Graphics g) {
-        g.drawImage(getImage(), this.offset + getWidth(), 0, getWidth(), getHeight(), this);
-        g.drawImage(getImage(), this.offset + 1, 0, getWidth(), getHeight(), this);
+        super.paintComponent(g);
+        g.drawImage(this.image, this.offset + getWidth(), 0, getWidth(), getHeight(), this);
+        g.drawImage(this.image, this.offset + 1, 0, getWidth(), getHeight(), this);
+
+        // https://stackoverflow.com/questions/19480076/java-animation-stutters-when-not-moving-mouse-cursor
+        // Règle les problèmes de "lag" sur l'animation du fond d'écran.
+        Toolkit.getDefaultToolkit().sync();
     }
 }
