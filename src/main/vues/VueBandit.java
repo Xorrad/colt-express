@@ -1,9 +1,12 @@
 package main.vues;
 
 import main.controlleurs.ActionController;
+import main.controlleurs.BoutonAnimationController;
 import main.controlleurs.FinTourController;
+import main.controlleurs.RetirerActionController;
 import main.modeles.Direction;
 import main.modeles.Modele;
+import main.modeles.actions.Action;
 import main.modeles.actions.BraqueAction;
 import main.modeles.actions.ChangeEtageAction;
 import main.modeles.actions.ChangeWagonAction;
@@ -90,11 +93,12 @@ public class VueBandit extends JPanel implements Observer {
         imageCadre.add(this.panelInfo, c);
 
         // Actions du joueur
+        this.panelActions.setPreferredSize(new Dimension(this.getWidth(), Assets.IMG_ACTIONS_BRAQUE.getHeight() + 10));
         this.panelActions.setBorder(new CompoundBorder(
                 new EmptyBorder(0, 10, 0, 10),
                 new CompoundBorder(
                     new MatteBorder(7, 0, 0, 0, new Color(120, 72, 31)),
-                    new EmptyBorder(PADDING/2, PADDING, PADDING/2, PADDING)
+                    new EmptyBorder(0, PADDING, 0, PADDING)
                 )
         ));
         c.gridx = 0;
@@ -110,6 +114,22 @@ public class VueBandit extends JPanel implements Observer {
         this.labelNom.setText(this.bandit.getNom());
         this.labelSomme.setText("$" + this.bandit.getSommeTresor());
         this.labelBalles.setNombre(this.bandit.getNombreBalles());
-        //this.repaint();
+
+        //if(this.panelActions.getComponentCount() != this.bandit.getNombreActions()) {
+        this.panelActions.removeAll();
+        for (Action action : this.bandit.getActions()) {
+            JIcon icon = null;
+            if(this.modele.getTourBandit().getNum() == this.bandit.getNum()) {
+                icon = new JIcon(action.getIcon(), 1);
+                icon.addMouseListener(new RetirerActionController(this.modele, action));
+                icon.addMouseListener(new BoutonAnimationController(icon));
+            }
+            else {
+                icon = new JIcon(Assets.IMG_ACTIONS_INCONNUE, 1);
+            }
+            this.panelActions.add(icon);
+        }
+        this.panelActions.revalidate();
+        this.panelActions.repaint();
     }
 }

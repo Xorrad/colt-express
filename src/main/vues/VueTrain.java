@@ -7,6 +7,7 @@ import main.modeles.entites.Entite;
 import main.modeles.entites.Sheriff;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -23,6 +24,7 @@ public class VueTrain extends JPanel implements Observer {
 
         Dimension dim = new Dimension((LARGEUR_WAGON+MARGE_WAGON)*Modele.NB_WAGONS + 10, 2*HAUTEUR_WAGON + 10);
         this.setPreferredSize(dim);
+        this.setBorder(new EmptyBorder(10, 0, 0, 0));
     }
 
     @Override

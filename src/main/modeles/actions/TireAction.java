@@ -4,7 +4,9 @@ import main.modeles.Direction;
 import main.modeles.Toigon;
 import main.modeles.entites.Bandit;
 import main.modeles.entites.Entite;
+import main.vues.Assets;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class TireAction extends Action {
@@ -17,6 +19,21 @@ public class TireAction extends Action {
 
     public Direction getDir() {
         return dir;
+    }
+
+    @Override
+    public Image getIcon() {
+        switch(this.dir) {
+            case AVANT:
+                return Assets.IMG_ACTIONS_TIRE_AVANT;
+            case ARRIERE:
+                return Assets.IMG_ACTIONS_TIRE_ARRIERE;
+            case HAUT:
+                return Assets.IMG_ACTIONS_TIRE_HAUT;
+            case BAS:
+                return Assets.IMG_ACTIONS_TIRE_BAS;
+        }
+        return Assets.IMG_ACTIONS_TIRE_BAS;
     }
 
     @Override

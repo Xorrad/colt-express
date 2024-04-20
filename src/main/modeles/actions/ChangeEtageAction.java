@@ -2,11 +2,19 @@ package main.modeles.actions;
 
 import main.modeles.Direction;
 import main.modeles.entites.Bandit;
+import main.vues.Assets;
+
+import java.awt.*;
 
 public class ChangeEtageAction extends Action {
 
     public ChangeEtageAction(Bandit bandit) {
         super(bandit);
+    }
+
+    @Override
+    public Image getIcon() {
+        return Assets.IMG_ACTIONS_ETAGES;
     }
 
     @Override
