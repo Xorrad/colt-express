@@ -14,11 +14,15 @@ public class ActionController extends Controller {
         this.action = action;
     }
 
+    public Action getAction() {
+        return action;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(this.action.getBandit().getActions().size() >= 3)
+        if(this.modele.getTourBandit().getActions().size() >= Modele.NB_ACTIONS)
             return;
-        this.action.getBandit().ajouteAction(this.action);
+        this.modele.getTourBandit().ajouteAction(this.action);
         this.modele.notifyObservers();
     }
 }

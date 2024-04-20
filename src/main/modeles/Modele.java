@@ -19,6 +19,8 @@ public class Modele extends Observable {
     public static final int NB_BANDITS = 4;
     public static final int NB_SHERIFFS = 1;
     public static final int NB_TRESORS_WAGON = 5;
+    public static final int NB_ACTIONS = 3;
+
 
     private Toigon[] train; // Tableau qui contient les toigons qui constituent le train, ya pas encore de locomotive.
     private HashMap<Integer, Bandit> bandits;
@@ -165,37 +167,41 @@ public class Modele extends Observable {
         return this.bandits.get(this.tourNumBandit);
     }
 
+    public Phase getPhaseJeu() {
+        if(this.tourNumBandit == this.bandits.size())
+            return Phase.ACTIONS;
+        return Phase.CHOIX;
+    }
+
     // Passe au bandit suivant (pour la selection des actions).
     public void avanceTour() {
         this.tourNumBandit++;
-
-        if(this.tourNumBandit == NB_BANDITS) {
-            this.tourNumBandit = 0;
-            this.finTour();
-        }
-
         this.notifyObservers();
     }
 
-    // Fin du tour -> joue les actions des bandits, déplace sheriff...
-    public void finTour() {
-        System.out.println("La selection des actions est terminée.");
+    public boolean resteActionAJouee() {
+        for(Bandit bandit : this.bandits.values()) {
+            if(bandit.getNombreActions() > 0)
+                return true;
+        }
+        return false;
+    }
 
-        boolean resteAction = true;
-        int i = 0;
-        while(resteAction) {
-            resteAction = false;
-            System.out.println("Applique les " + i + "eme actions");
-            for(Bandit bandit : this.bandits.values()) {
-                if(bandit.getNombreActions() > 0) {
-                    resteAction = true;
-                    bandit.joueAction();
-                    this.sheriffs.forEach((num, sheriff) -> sheriff.joue());
-                }
-            }
-            i++;
+    // Joue la premier action du bandit donné et déplace (potentiellement) les sheriffs.
+    public void joueActions(int numBandit) {
+        if(!resteActionAJouee()) {
+            System.out.println("Une nouvelle phase de choix débute.");
+            this.tourNumBandit = 0;
+            this.notifyObservers();
+            return;
         }
 
-        System.out.println("Un nouveau tour débute.");
+        Bandit bandit = this.bandits.get(numBandit);
+        if(bandit.getNombreActions() > 0) {
+            System.out.println("Applique l'action de " + bandit.getNom() + ".");
+            bandit.joueAction();
+            this.sheriffs.forEach((num, sheriff) -> sheriff.joue());
+            this.notifyObservers();
+        }
     }
 }

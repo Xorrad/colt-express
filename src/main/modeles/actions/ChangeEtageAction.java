@@ -7,32 +7,25 @@ import main.vues.Assets;
 import java.awt.*;
 
 public class ChangeEtageAction extends Action {
-
     @Override
     public Image getIcon() {
         return Assets.IMG_ACTIONS_ETAGES;
     }
 
-
-
-    public ChangeEtageAction(Bandit bandit) {
-        super(bandit);
-    }
-
     @Override
-    public void apply() {
-        if(this.bandit.getToigon().estToit()) {
-            this.bandit.deplace(Direction.BAS);
-            System.out.println(this.bandit.getNom() + " entre dans le wagon.");
+    public void apply(Bandit bandit) {
+        if(bandit.getToigon().estToit()) {
+            bandit.deplace(Direction.BAS);
+            System.out.println(bandit.getNom() + " entre dans le wagon.");
         }
         else {
-            this.bandit.deplace(Direction.HAUT);
-            System.out.println(this.bandit.getNom() + " grimpe sur le toit.");
+            bandit.deplace(Direction.HAUT);
+            System.out.println(bandit.getNom() + " grimpe sur le toit.");
         }
     }
 
     @Override
-    public boolean canApply() {
+    public boolean canApply(Bandit bandit) {
         return true;
     }
 }

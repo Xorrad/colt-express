@@ -145,7 +145,7 @@ public class Bandit extends Entite {
     }
 
     public void joueAction() {
-        this.actions.get(0).apply();
+        this.actions.get(0).apply(this);
         this.actions.remove(0);
     }
 
@@ -155,7 +155,6 @@ public class Bandit extends Entite {
 
     @Override
     public void deplace(Direction dir) {
-//
         super.deplace(dir);
 
         // On change le toigon des trésors que le bandit porte.

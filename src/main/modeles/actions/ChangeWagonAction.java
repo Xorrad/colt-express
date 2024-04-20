@@ -15,8 +15,7 @@ import java.awt.*;
 public class ChangeWagonAction extends Action {
     private Direction dir;
 
-    public ChangeWagonAction(Bandit bandit, Direction dir) {
-        super(bandit);
+    public ChangeWagonAction(Direction dir) {
         this.dir = dir;
     }
 
@@ -32,24 +31,24 @@ public class ChangeWagonAction extends Action {
     }
 
     @Override
-    public void apply() {
-        if(!this.canApply()) {
+    public void apply(Bandit bandit) {
+        if(!this.canApply(bandit)) {
             if(this.dir == Direction.AVANT) {
-                System.out.println(this.bandit.getNom() + " est déjà sur la locomotive.");
+                System.out.println(bandit.getNom() + " est déjà sur la locomotive.");
             }
             else {
-                System.out.println(this.bandit.getNom() + " est déjà sur le dernier wagon.");
+                System.out.println(bandit.getNom() + " est déjà sur le dernier wagon.");
             }
             return;
         }
         //throw new RuntimeException(this.bandit.getNom() + " ne peut pas aller au wagon en " + this.dir.name());
 
-        this.bandit.deplace(this.dir);
-        System.out.println(this.bandit.getNom() + " passe au wagon " + this.dir.name().toLowerCase() + ".");
+        bandit.deplace(this.dir);
+        System.out.println(bandit.getNom() + " passe au wagon " + this.dir.name().toLowerCase() + ".");
     }
 
     @Override
-    public boolean canApply() {
-        return this.bandit.getToigon().getVoisin(this.dir) != null;
+    public boolean canApply(Bandit bandit) {
+        return bandit.getToigon().getVoisin(this.dir) != null;
     }
 }

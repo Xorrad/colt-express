@@ -6,6 +6,7 @@ import main.controlleurs.FinTourController;
 import main.controlleurs.RetirerActionController;
 import main.modeles.Direction;
 import main.modeles.Modele;
+import main.modeles.Phase;
 import main.modeles.actions.Action;
 import main.modeles.actions.BraqueAction;
 import main.modeles.actions.ChangeEtageAction;
@@ -40,31 +41,17 @@ public class VueBandit extends JPanel implements Observer {
         this.setOpaque(false);
 
         // Lire https://docs.oracle.com/javase/tutorial/uiswing/layout/gridbag.html
-        //this.setLayout(new GridBagLayout());
-//        GridBagConstraints c = new GridBagConstraints(
-//                0, 0, // grid x,y
-//                1, 1, // grid width,height
-//                0.5, 0.5, // weight x,y
-//                GridBagConstraints.CENTER,
-//                GridBagConstraints.HORIZONTAL,
-//                new Insets(0,0,0,0),
-//                0, 0
-//        );
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
 
         // Image de fond (cadre)
         JImage imageCadre = new JImage(Assets.IMG_CADRE);
         imageCadre.setLayout(new GridBagLayout());
-//        imageCadre.setPreferredSize(new Dimension(
-//                Math.max(this.getWidth(), Assets.IMG_ACTIONS_BRAQUE.getWidth()*5 + 20),
-//                200
-//        ));
 
         this.panelInfo = new JPanel();
         this.panelInfo.setOpaque(false);
         this.panelInfo.setPreferredSize(new Dimension(
-                Math.max(this.getWidth(), Assets.IMG_ACTIONS_BRAQUE.getWidth()*3 + 20),
+                Math.max(this.getWidth(), Assets.IMG_ACTIONS_BRAQUE.getWidth()*Modele.NB_ACTIONS + 20),
                 100
         ));
 
@@ -103,7 +90,7 @@ public class VueBandit extends JPanel implements Observer {
 
         // Actions du joueur
         this.panelActions.setPreferredSize(new Dimension(
-                Math.max(this.getWidth(), Assets.IMG_ACTIONS_BRAQUE.getWidth()*3 + 20),
+                Math.max(this.getWidth(), Assets.IMG_ACTIONS_BRAQUE.getWidth()*Modele.NB_ACTIONS + 20),
                 Assets.IMG_ACTIONS_BRAQUE.getHeight() + 10)
         );
         this.panelActions.setBorder(new CompoundBorder(
@@ -131,10 +118,12 @@ public class VueBandit extends JPanel implements Observer {
         this.panelActions.removeAll();
         for (Action action : this.bandit.getActions()) {
             JIcon icon = null;
-            if(this.modele.getTourBandit().getNum() == this.bandit.getNum()) {
+            if(this.modele.getPhaseJeu() == Phase.ACTIONS || this.modele.getTourBandit().getNum() == this.bandit.getNum()) {
                 icon = new JIcon(action.getIcon(), 1);
-                icon.addMouseListener(new RetirerActionController(this.modele, action));
-                icon.addMouseListener(new BoutonAnimationController(icon));
+                if(this.modele.getPhaseJeu() == Phase.CHOIX) {
+                    icon.addMouseListener(new RetirerActionController(this.modele, action));
+                    icon.addMouseListener(new BoutonAnimationController(icon));
+                }
             }
             else {
                 icon = new JIcon(Assets.IMG_ACTIONS_INCONNUE, 1);
