@@ -10,6 +10,7 @@ import main.modeles.actions.ChangeWagonAction;
 import main.modeles.entites.Bandit;
 
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.MatteBorder;
@@ -23,7 +24,7 @@ public class VueBandit extends JPanel implements Observer {
     private JPanel panelInfo;
     private JLabel labelNom;
     private JLabel labelSomme;
-    private JLabel labelBalles;
+    private JIcon labelBalles;
 
     private JPanel panelActions;
 
@@ -61,6 +62,8 @@ public class VueBandit extends JPanel implements Observer {
         // Image du personnage
         this.labelImg = new JLabel(new ImageIcon(bandit.getIcon()));
         this.labelImg.setBorder(new EmptyBorder(PADDING/2, PADDING, PADDING/2, PADDING/2));
+        this.labelImg.setVerticalAlignment(JLabel.TOP);
+        this.labelImg.setVerticalTextPosition(JLabel.TOP);
         c.gridwidth = 1;
         c.gridheight = 1;
         c.gridx = 0;
@@ -77,8 +80,7 @@ public class VueBandit extends JPanel implements Observer {
         this.labelSomme.setFont(Assets.FONT_WESTERNBANG);
         this.panelInfo.add(this.labelSomme);
 
-        this.labelBalles = new JLabel(".".repeat(bandit.getNombreBalles()));
-        this.labelSomme.setFont(Assets.FONT_WESTERNBANG);
+        this.labelBalles = new JIcon(Assets.IMG_BALLE, bandit.getNombreBalles());
         this.panelInfo.add(this.labelBalles);
 
         this.panelInfo.setLayout(new BoxLayout(this.panelInfo, BoxLayout.Y_AXIS)); // Elements l'un au dessus de l'autre
@@ -88,8 +90,13 @@ public class VueBandit extends JPanel implements Observer {
         imageCadre.add(this.panelInfo, c);
 
         // Actions du joueur
-//        this.panelActions.add();
-        this.panelActions.setBorder(new EmptyBorder(PADDING/2, PADDING, PADDING/2, PADDING));
+        this.panelActions.setBorder(new CompoundBorder(
+                new EmptyBorder(0, 10, 0, 10),
+                new CompoundBorder(
+                    new MatteBorder(7, 0, 0, 0, new Color(120, 72, 31)),
+                    new EmptyBorder(PADDING/2, PADDING, PADDING/2, PADDING)
+                )
+        ));
         c.gridx = 0;
         c.gridy = 1;
         c.gridwidth = 2;
@@ -102,6 +109,7 @@ public class VueBandit extends JPanel implements Observer {
     public void update() {
         this.labelNom.setText(this.bandit.getNom());
         this.labelSomme.setText("$" + this.bandit.getSommeTresor());
+        this.labelBalles.setNombre(this.bandit.getNombreBalles());
         //this.repaint();
     }
 }
