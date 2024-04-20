@@ -18,6 +18,7 @@ public class Assets {
 
     public static BufferedImage IMG_BG;
     public static BufferedImage IMG_CADRE;
+    public static BufferedImage IMG_CADRE_GRAND;
     public static BufferedImage IMG_BALLE;
     public static BufferedImage IMG_TITRE;
     public static BufferedImage IMG_WAGON;
@@ -57,6 +58,7 @@ public class Assets {
         try {
             IMG_BG = loadImage("background.png");
             IMG_CADRE = loadImage("cadre.png");
+            IMG_CADRE_GRAND = loadImage("cadre_grand.png");
             IMG_BALLE = loadImage("balle.png");
             IMG_TITRE = loadImage("titre.png");
 

@@ -31,6 +31,7 @@ public class VueBackground extends JComponent {
         g.drawImage(this.image, this.offset + 1, 0, getWidth(), getHeight(), this);
 
         // https://stackoverflow.com/questions/19480076/java-animation-stutters-when-not-moving-mouse-cursor
+        // "This flushs the graphics buffer which some systems like Linux use."
         // Règle les problèmes de "lag" sur l'animation du fond d'écran.
         Toolkit.getDefaultToolkit().sync();
     }

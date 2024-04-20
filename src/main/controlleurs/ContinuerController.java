@@ -4,8 +4,10 @@ import main.modeles.Modele;
 import main.modeles.Phase;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class ContinuerController extends Controller {
+public class ContinuerController extends Controller implements MouseListener {
     private int numBandit;
 
     public ContinuerController(Modele modele) {
@@ -13,8 +15,7 @@ public class ContinuerController extends Controller {
         this.numBandit = 0;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    public void continuer() {
         this.modele.joueAction(this.numBandit);
         this.numBandit = (this.numBandit+1) % Modele.NB_BANDITS;
 
@@ -32,5 +33,35 @@ public class ContinuerController extends Controller {
             if(!this.modele.resteActionAJouee())
                 this.modele.changePhase();
         }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        this.continuer();
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        this.continuer();
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }
