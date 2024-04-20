@@ -57,27 +57,25 @@ public class VueTrain extends JPanel implements Observer {
             // pour les personnages, pour pouvoir les répartir
             // uniformement sur la surface (toit ou sol) de leur toigon.
             // On ajoute également une légère marge aux bords.
-            int marge = 20;
+            int marge = 30;
             int xMin = marge;
             int xMax = toigon.estWagonLocomotive() ? (int) ((float) Assets.IMG_LOCOMOTIVE.getWidth() / 2.25f) - marge : Assets.IMG_WAGON.getWidth() - marge;
-            int step = Math.max(1, (xMax - xMin) / (bandits.size() + sheriffs.size()));
-            int actuel = xMin;
+            int step = Math.max(1, (xMax - xMin) / Modele.NB_BANDITS);
 
             // On décale légèrement les personnages verticalement
             // pour qu'ils soient bien "posés" sur le sol ou toit.
             int offsetToit = toigon.estToit() ? 12 : -12;
 
             // Dessine les bandits
+            // La position d'un bandit dans un wagon est fixe pour mieux suivre leurs déplacements/actions.
             for (int i = 0; i < bandits.size(); i++) {
                 g.setColor(bandits.get(i).getColor());
-                g.drawImage(bandits.get(i).getImage(), x + actuel, y + 40 + offsetToit, 40, 40, this);
-                actuel += step;
+                g.drawImage(bandits.get(i).getImage(), x + xMin + bandits.get(i).getNum()*step, y + 40 + offsetToit, 40, 40, this);
             }
 
             // Dessine les sheriffs
             for (int i = 0; i < sheriffs.size(); i++) {
-                g.drawImage(Assets.IMG_SHERIFF, x + actuel, y + 40 + offsetToit, 40, 40, this);
-                actuel += step;
+                g.drawImage(Assets.IMG_SHERIFF, x + xMin + sheriffs.get(i).getNum()*step, y + 40 + offsetToit, 40, 40, this);
             }
         }
     }
