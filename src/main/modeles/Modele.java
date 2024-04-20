@@ -31,7 +31,7 @@ public class Modele extends Observable {
     }
 
     private void initTrain(){
-        this.train = new Toigon[2*NB_WAGONS-1];
+        this.train = new Toigon[2*NB_WAGONS];
 
         // Tristan:
         // La manière dont je visualise le train, c'est que dans un train de taille i,
@@ -42,8 +42,7 @@ public class Modele extends Observable {
         // Je pense qu'il est mieux de mettre le toigon du bas en i et celui du haut en i+1.
         // Donc mettre les wagons par pair de deux.
 
-        // On s'arrête avant le dernier toit car le dernier toigon est la locomotive.
-        for(int i = 0; i < 2*NB_WAGONS-1; i++) {
+        for(int i = 0; i < 2*NB_WAGONS; i++) {
             this.train[i] = new Toigon(i, i%2 == 1);
 
             // Ajoute les voisins à chaque toigons en suivant le schéma d'indices:
@@ -67,6 +66,8 @@ public class Modele extends Observable {
 
         for(int i = 0; i < NB_BANDITS; i++) {
             int indiceToigon = i % this.train.length;
+            if(i == this.train.length-2) // Pas de bandits sur la locomotive.
+                indiceToigon = (indiceToigon+1) % this.train.length;
             Bandit bandit = new Bandit(i, this.train[indiceToigon], "Bandit " + i);
             this.train[indiceToigon].ajouteEntite(bandit);
             this.bandits.put(i, bandit);
@@ -111,7 +112,7 @@ public class Modele extends Observable {
     }
 
     public Toigon getLocomotive() {
-        return this.train[this.train.length-1];
+        return this.train[this.train.length-2];
     }
 
     public int getNombreToigons() {

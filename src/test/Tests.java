@@ -18,10 +18,10 @@ public class Tests {
 
         // Teste que la taille du train (chaque Toigons compte pour 1, donc un wagon et son toit compte pour 2) est bien égal à 2 fois tailleTrain-1
         // car la locomotive n'a pas de toit.
-        assertEquals(2*Modele.NB_WAGONS-1, m.getTrain().length);
+        assertEquals(2*Modele.NB_WAGONS, m.getTrain().length);
 
         // Teste que l'initialisation du train marche bien (indices, toits et voisins).
-        for (int i = 0; i < 2*Modele.NB_WAGONS-1; i++){
+        for (int i = 0; i < 2*Modele.NB_WAGONS; i++){
             Toigon t = m.getToigon(i);
 
             assertEquals(i%2 == 1, t.estToit());
@@ -32,7 +32,7 @@ public class Tests {
                 assertNull(t.getVoisin(Direction.HAUT));
                 assertEquals(t.getVoisin(Direction.BAS), m.getToigon(i-1));
             }
-            else if(!t.estLocomotive()){
+            else {
                 assertEquals(t.getVoisin(Direction.HAUT), m.getToigon(i+1));
                 assertNull(t.getVoisin(Direction.BAS));
             }
@@ -42,9 +42,11 @@ public class Tests {
             else assertNull(t.getVoisin(Direction.ARRIERE));
 
             // Teste voisins AVANT
-            if(i < 2*Modele.NB_WAGONS-3) assertEquals(t.getVoisin(Direction.AVANT), m.getToigon(i + 2));
+            if(i < 2*Modele.NB_WAGONS-2) assertEquals(t.getVoisin(Direction.AVANT), m.getToigon(i + 2));
             else assertNull(t.getVoisin(Direction.AVANT));
         }
+
+        assertEquals(m.getLocomotive(), m.getToigon(2*Modele.NB_WAGONS-2));
     }
 
     @Test
@@ -103,12 +105,12 @@ public class Tests {
 
         // Teste déplacement locomotive.
         sheriff.getToigon().retireEntite(sheriff);
-        sheriff.setToigon(m.getToigon(m.getLocomotive().getNumero()-1));
+        sheriff.setToigon(m.getToigon(m.getLocomotive().getNumero()+1));
         sheriff.getToigon().ajouteEntite(sheriff);
         assertFalse(sheriff.peutDeplacer(Direction.AVANT));
         sheriff.deplace(Direction.BAS);
-        assertTrue(sheriff.peutDeplacer(Direction.AVANT));
-        sheriff.deplace(Direction.AVANT);
         assertFalse(sheriff.peutDeplacer(Direction.AVANT));
+        sheriff.deplace(Direction.ARRIERE);
+        assertTrue(sheriff.peutDeplacer(Direction.AVANT));
     }
 }
