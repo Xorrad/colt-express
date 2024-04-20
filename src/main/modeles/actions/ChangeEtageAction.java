@@ -2,6 +2,7 @@ package main.modeles.actions;
 
 import main.modeles.Direction;
 import main.modeles.entites.Bandit;
+import main.modeles.entites.Entite;
 import main.vues.Assets;
 
 import java.awt.*;
@@ -22,7 +23,7 @@ public class ChangeEtageAction extends Action {
     @Override
     public void apply() {
         if(!this.canApply()) {
-            System.out.println(this.bandit.getNom() + " ne peut pas changer d'étage sur la locomotive.");
+            System.out.println(this.bandit.getNom() + " ne peut pas descendre car le Shériff est dans le wagon.");
             return;
         }
         //throw new RuntimeException(this.bandit.getNom() + " ne peut pas changer d'étage sur la locomotive.");
@@ -39,6 +40,6 @@ public class ChangeEtageAction extends Action {
 
     @Override
     public boolean canApply() {
-        return !this.bandit.getToigon().estLocomotive();
+        return this.bandit.getToigon().getHautBas().getEntites(Entite.Type.SHERIFF).isEmpty();
     }
 }

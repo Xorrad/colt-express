@@ -20,6 +20,7 @@ public class Sheriff extends Entite {
 
     public void joue(){
         if (Math.random()<this.NERVOSITE_SHERIFF){
+             
             this.deplace(Math.random() <= 0.5 ? Direction.ARRIERE : Direction.AVANT);
             System.out.println("le Shériff se déplace.");
             ArrayList<Bandit> bandits = this.getToigon().getEntites(Entite.Type.BANDIT);

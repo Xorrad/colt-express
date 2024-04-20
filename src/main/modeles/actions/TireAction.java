@@ -4,6 +4,7 @@ import main.modeles.Direction;
 import main.modeles.Toigon;
 import main.modeles.entites.Bandit;
 import main.modeles.entites.Entite;
+import main.modeles.entites.Tresor;
 import main.vues.Assets;
 
 import java.awt.*;
@@ -47,7 +48,8 @@ public class TireAction extends Action {
         ArrayList<Bandit> bandits = this.bandit.getToigon().getVoisin(this.dir).getEntites(Entite.Type.BANDIT);
         for(int i = 0; i < bandits.size(); i++) {
             //g.setColor(Color.GREEN);
-            bandits.get(i).deposeRandomTresor();
+            Tresor tresor = bandits.get(i).deposeRandomTresor();
+            System.out.println(bandits.get(i).getNom()+" se fait tirer dessus par +"+ bandit.getNom()+ " et lâche un(e) "+ tresor.getNom()+" qui vaut "+ tresor.getNom()+".");
         }
 
 

@@ -34,7 +34,11 @@ public class ChangeWagonAction extends Action {
     @Override
     public void apply() {
         if(!this.canApply()) {
-            if(this.dir == Direction.AVANT) {
+            if (this.bandit.getToigon().getVoisin(dir)==null || !this.bandit.getToigon().getVoisin(dir).getEntites(Entite.Type.SHERIFF).isEmpty()){
+                System.out.println(this.bandit.getNom() + " est bloqué par le Shérif");
+            }
+
+            else if(this.dir == Direction.AVANT) {
                 System.out.println(this.bandit.getNom() + " est déjà sur la locomotive.");
             }
             else {
@@ -50,6 +54,6 @@ public class ChangeWagonAction extends Action {
 
     @Override
     public boolean canApply() {
-        return this.bandit.getToigon().getVoisin(this.dir) != null;
+        return (this.bandit.getToigon().getVoisin(dir)==null || this.bandit.getToigon().getVoisin(dir).getEntites(Entite.Type.SHERIFF).isEmpty());
     }
 }

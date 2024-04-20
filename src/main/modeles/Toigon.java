@@ -74,5 +74,11 @@ public class Toigon {
         }
         this.voisins.put(dir, voisin);
     }
+    public Toigon getHautBas(){
+        if (this.estToit()){
+            return this.getVoisin(Direction.BAS);
+        }
+        return this.getVoisin(Direction.HAUT);
+    }
 
 }
