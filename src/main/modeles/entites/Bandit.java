@@ -18,6 +18,7 @@ public class Bandit extends Entite {
     private ArrayList<Tresor> tresors;
     private Stack<Action> actions;
     private BufferedImage image;
+    private Image icon;
 
     public Bandit(int num, Toigon toigon, String nom) {
         super(num, toigon, Entite.Type.BANDIT);
@@ -59,10 +60,16 @@ public class Bandit extends Entite {
                 this.image.setRGB(x, y, newColor.getRGB());
             }
         }
+
+        this.icon = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
     }
 
     public BufferedImage getImage() {
         return image;
+    }
+
+    public Image getIcon() {
+        return icon;
     }
 
     public String getNom() {

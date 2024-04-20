@@ -59,7 +59,7 @@ public class VueBandit extends JPanel implements Observer {
         this.panelActions.setOpaque(false);
 
         // Image du personnage
-        this.labelImg = new JLabel("IMG");
+        this.labelImg = new JLabel(new ImageIcon(bandit.getIcon()));
         this.labelImg.setBorder(new EmptyBorder(PADDING/2, PADDING, PADDING/2, PADDING/2));
         c.gridwidth = 1;
         c.gridheight = 1;
