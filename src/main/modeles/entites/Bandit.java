@@ -138,6 +138,7 @@ public class Bandit extends Entite {
 
     @Override
     public void deplace(Direction dir) {
+//
         super.deplace(dir);
 
         // On change le toigon des trésors que le bandit porte.

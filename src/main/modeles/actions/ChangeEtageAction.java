@@ -2,6 +2,7 @@ package main.modeles.actions;
 
 import main.modeles.Direction;
 import main.modeles.entites.Bandit;
+import main.modeles.entites.Entite;
 
 public class ChangeEtageAction extends Action {
 
