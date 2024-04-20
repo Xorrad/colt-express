@@ -16,7 +16,7 @@ public class RetirerActionController extends Controller implements MouseListener
     }
 
     public void apply() {
-        this.action.getBandit().retireAction(this.action);
+        this.modele.getTourBandit().retireAction(this.action);
         this.modele.notifyObservers();
     }
 

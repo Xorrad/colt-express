@@ -34,6 +34,11 @@ public class Toigon {
         return this.numero == 2*Modele.NB_WAGONS-2;
     }
 
+    public boolean estWagonLocomotive() {
+        // Renvoie vrai si la toigon est la locomotive ou le toit de la locomotive.
+        return this.numero >= 2*Modele.NB_WAGONS-2;
+    }
+
     public void ajouteEntite(Entite entite) {
         this.entites.get(entite.getType()).add(entite);
     }

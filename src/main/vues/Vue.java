@@ -52,16 +52,9 @@ public class Vue implements Observer {
         this.frame.setVisible(true);
     }
 
-    public void updateVueCommandes() {
-        this.frame.remove(this.vueCommandes);
-        this.vueCommandes = new VueCommandes(modele, modele.getTourBandit());
-        this.frame.add(this.vueCommandes);
-    }
-
     @Override
     public void update() {
-        this.updateVueCommandes();
-        this.frame.validate();
-        this.frame.repaint();
+        //this.frame.validate();
+        //this.frame.repaint();
     }
 }

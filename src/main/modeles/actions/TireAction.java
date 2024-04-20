@@ -13,8 +13,7 @@ import java.util.ArrayList;
 public class TireAction extends Action {
     private Direction dir;
 
-    public TireAction(Bandit bandit, Direction dir) {
-        super(bandit);
+    public TireAction(Direction dir) {
         this.dir = dir;
     }
 
@@ -38,26 +37,22 @@ public class TireAction extends Action {
     }
 
     @Override
-    public void apply() {
-        if(!this.canApply()) {
-            System.out.println(this.bandit.getNom() + "ne peut pas tirer.");
+    public void apply(Bandit bandit) {
+        if(!this.canApply(bandit)) {
+            System.out.println(bandit.getNom() + "ne peut pas tirer.");
             return;
         }
-        this.bandit.setNombreBalles(this.bandit.getNombreBalles()-1);
+        bandit.setNombreBalles(bandit.getNombreBalles()-1);
 
-        ArrayList<Bandit> bandits = this.bandit.getToigon().getVoisin(this.dir).getEntites(Entite.Type.BANDIT);
+        ArrayList<Bandit> bandits = bandit.getToigon().getVoisin(this.dir).getEntites(Entite.Type.BANDIT);
         for(int i = 0; i < bandits.size(); i++) {
-            //g.setColor(Color.GREEN);
             Tresor tresor = bandits.get(i).deposeRandomTresor();
             System.out.println(bandits.get(i).getNom()+" se fait tirer dessus par +"+ bandit.getNom()+ " et lâche un(e) "+ tresor.getNom()+" qui vaut "+ tresor.getNom()+".");
         }
-
-
     }
 
     @Override
-    public boolean canApply(){
-
-        return (this.bandit.getNombreBalles()>0 && this.bandit.getToigon().getVoisin(this.dir)!=null);
+    public boolean canApply(Bandit bandit){
+        return (bandit.getNombreBalles()>0 && bandit.getToigon().getVoisin(this.dir)!=null);
     }
 }
