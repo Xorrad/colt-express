@@ -103,10 +103,10 @@ public class Assets {
     }
 
     public static void chargeMusiques() {
+        ajouteMusique("cactus-train.wav");
         ajouteMusique("desert-monolith.wav");
         ajouteMusique("outlaw-ride.wav");
         ajouteMusique("desert-monolith.wav");
-        ajouteMusique("cactus-train.wav");
 
         AUDIO_TRAIN = loadSound("train.wav");
     }

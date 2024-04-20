@@ -5,7 +5,6 @@ import main.modeles.entites.Sheriff;
 import main.modeles.entites.Tresor;
 import main.vues.Assets;
 
-import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.awt.image.BufferedImage;
@@ -21,6 +20,7 @@ public class Modele extends Observable {
     public static final int NB_TRESORS_WAGON = 5;
     public static final int NB_ACTIONS = 3;
 
+    public static final double NERVOSITE_SHERIFF = 1.0;
 
     private Toigon[] train; // Tableau qui contient les toigons qui constituent le train, ya pas encore de locomotive.
     private HashMap<Integer, Bandit> bandits;
@@ -188,14 +188,7 @@ public class Modele extends Observable {
     }
 
     // Joue la premier action du bandit donné et déplace (potentiellement) les sheriffs.
-    public void joueActions(int numBandit) {
-        if(!resteActionAJouee()) {
-            System.out.println("Une nouvelle phase de choix débute.");
-            this.tourNumBandit = 0;
-            this.notifyObservers();
-            return;
-        }
-
+    public void joueAction(int numBandit) {
         Bandit bandit = this.bandits.get(numBandit);
         if(bandit.getNombreActions() > 0) {
             System.out.println("Applique l'action de " + bandit.getNom() + ".");
@@ -203,5 +196,11 @@ public class Modele extends Observable {
             this.sheriffs.forEach((num, sheriff) -> sheriff.joue());
             this.notifyObservers();
         }
+    }
+
+    public void changePhase() {
+        System.out.println("Une nouvelle phase de choix débute.");
+        this.tourNumBandit = 0;
+        this.notifyObservers();
     }
 }

@@ -15,9 +15,22 @@ public class ContinuerController extends Controller {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.modele.joueActions(this.numBandit);
+        this.modele.joueAction(this.numBandit);
         this.numBandit = (this.numBandit+1) % Modele.NB_BANDITS;
-        if(this.modele.getPhaseJeu() == Phase.CHOIX)
+
+        // On prend le bandit suivant qui a une action à jouer.
+        while(this.numBandit < Modele.NB_BANDITS
+                && this.modele.getBandits().get(this.numBandit).getNombreActions() == 0
+        ) this.numBandit++;
+
+        // Quand on a réalisé toutes les premières actions de chaque bandit, on passe aux deuxiemes etc...
+        if(this.numBandit == Modele.NB_BANDITS) {
             this.numBandit = 0;
+
+            // Quand toutes les actions de tous les bandits ont été jouées, on passe
+            // à la phase de choix.
+            if(!this.modele.resteActionAJouee())
+                this.modele.changePhase();
+        }
     }
 }
