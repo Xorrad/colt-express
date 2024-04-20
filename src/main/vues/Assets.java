@@ -4,7 +4,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.nio.Buffer;
+import java.io.IOException;
 import java.util.HashMap;
 
 public class Assets {
@@ -32,42 +32,43 @@ public class Assets {
     public static Font FONT_WESTERNBANG;
     public static Font FONT_RIOGRANDE;
 
+    // Initialise la table des bandits statiquement car les assets ne sont pas
+    // chargés lors de l'execution des tests.
+    static {
+        BANDITS = new HashMap<>();
+    }
+
     public static void chargeAssets() {
+        Assets.chargeBandits();
+
         try {
-            IMG_BG = ImageIO.read(Assets.class.getResource("/resources/images/background.png"));
-            IMG_CADRE = ImageIO.read(Assets.class.getResource("/resources/images/cadre.png"));
-            IMG_BALLE = ImageIO.read(Assets.class.getResource("/resources/images/balle.png"));
-            IMG_TITRE = ImageIO.read(Assets.class.getResource("/resources/images/titre.png"));
+            IMG_BG = loadImage("background.png");
+            IMG_CADRE = loadImage("cadre.png");
+            IMG_BALLE = loadImage("balle.png");
+            IMG_TITRE = loadImage("titre.png");
 
-            IMG_BANDIT = ImageIO.read(Assets.class.getResource("/resources/images/bandit.png"));
-            IMG_SHERIFF = ImageIO.read(Assets.class.getResource("/resources/images/sheriff.png"));
+            IMG_BANDIT = loadImage("bandit.png");
+            IMG_SHERIFF = loadImage("sheriff.png");
 
-            IMG_ACTIONS_BRAQUE = ImageIO.read(Assets.class.getResource("/resources/images/action_braque.png"));
-            IMG_ACTIONS_ETAGES = ImageIO.read(Assets.class.getResource("/resources/images/action_etages.png"));
-            IMG_ACTIONS_MOVE_ARRIERE = ImageIO.read(Assets.class.getResource("/resources/images/action_move_arriere.png"));
-            IMG_ACTIONS_MOVE_AVANT = ImageIO.read(Assets.class.getResource("/resources/images/action_move_avant.png"));
-            IMG_ACTIONS_TIRE_ARRIERE = ImageIO.read(Assets.class.getResource("/resources/images/action_tire_arriere.png"));
-            IMG_ACTIONS_TIRE_AVANT = ImageIO.read(Assets.class.getResource("/resources/images/action_tire_avant.png"));
-            IMG_ACTIONS_TIRE_BAS = ImageIO.read(Assets.class.getResource("/resources/images/action_tire_bas.png"));
-            IMG_ACTIONS_TIRE_HAUT = ImageIO.read(Assets.class.getResource("/resources/images/action_tire_haut.png"));
-            IMG_ACTIONS_INCONNUE = ImageIO.read(Assets.class.getResource("/resources/images/action_inconnue.png"));
+            IMG_ACTIONS_BRAQUE = loadImage("action_braque.png");
+            IMG_ACTIONS_ETAGES = loadImage("action_etages.png");
+            IMG_ACTIONS_MOVE_ARRIERE = loadImage("action_move_arriere.png");
+            IMG_ACTIONS_MOVE_AVANT = loadImage("action_move_avant.png");
+            IMG_ACTIONS_TIRE_ARRIERE = loadImage("action_tire_arriere.png");
+            IMG_ACTIONS_TIRE_AVANT = loadImage("action_tire_avant.png");
+            IMG_ACTIONS_TIRE_BAS = loadImage("action_tire_bas.png");
+            IMG_ACTIONS_TIRE_HAUT = loadImage("action_tire_haut.png");
+            IMG_ACTIONS_INCONNUE = loadImage("action_inconnue.png");
 
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            FONT_WESTERNBANG = Font.createFont(Font.TRUETYPE_FONT, Assets.class.getResource("/resources/fonts/WesternBangBang-Regular.ttf").openStream()).deriveFont(24f);
-            ge.registerFont(FONT_WESTERNBANG);
-            FONT_RIOGRANDE = Font.createFont(Font.TRUETYPE_FONT, Assets.class.getResource("/resources/fonts/RioGrande.ttf").openStream()).deriveFont(24f);
-            ge.registerFont(FONT_RIOGRANDE);
+            FONT_WESTERNBANG = loadFont("WesternBangBang-Regular.ttf");
+            FONT_RIOGRANDE = loadFont("RioGrande.ttf");
         }
         catch(Exception e) {
             e.printStackTrace();
         }
-
-        Assets.chargeBandits();
     }
 
     public static void chargeBandits() {
-        BANDITS = new HashMap<>();
-
         try {
             File dir = new File(Assets.class.getResource("/resources/images/bandits/").getFile());
             for (File file : dir.listFiles()) {
@@ -83,6 +84,17 @@ public class Assets {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static BufferedImage loadImage(String nom) throws IOException {
+        return ImageIO.read(Assets.class.getResource("/resources/images/" + nom));
+    }
+
+    public static Font loadFont(String nom) throws IOException, FontFormatException {
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        Font font = Font.createFont(Font.TRUETYPE_FONT, Assets.class.getResource("/resources/fonts/" + nom).openStream()).deriveFont(24f);
+        ge.registerFont(font);
+        return font;
     }
 
 }
