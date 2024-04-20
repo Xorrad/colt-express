@@ -10,6 +10,7 @@ public class Assets {
     public static BufferedImage IMG_CADRE;
     public static BufferedImage IMG_BANDIT;
     public static BufferedImage IMG_BALLE;
+    public static BufferedImage IMG_TITRE;
 
     public static Font FONT_WESTERNBANG;
     public static Font FONT_RIOGRANDE;
@@ -20,6 +21,7 @@ public class Assets {
             IMG_CADRE = ImageIO.read(Assets.class.getResource("/resources/images/cadre.png"));
             IMG_BANDIT = ImageIO.read(Assets.class.getResource("/resources/images/bandit.png"));
             IMG_BALLE = ImageIO.read(Assets.class.getResource("/resources/images/balle.png"));
+            IMG_TITRE = ImageIO.read(Assets.class.getResource("/resources/images/titre.png"));
 
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             FONT_WESTERNBANG = Font.createFont(Font.TRUETYPE_FONT, Assets.class.getResource("/resources/fonts/WesternBangBang-Regular.ttf").openStream()).deriveFont(24f);

@@ -10,6 +10,7 @@ import main.modeles.actions.ChangeWagonAction;
 import main.modeles.entites.Bandit;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class VueCommandes extends JPanel implements Observer {
     private Modele modele;
@@ -42,6 +43,11 @@ public class VueCommandes extends JPanel implements Observer {
         JButton boutonFin = new JButton("Fin tour");
         boutonFin.addActionListener(new FinTourController(modele));
         this.add(boutonFin);
+
+        JImage imageTitre = new JImage(Assets.IMG_TITRE);
+        imageTitre.setPreferredSize(new Dimension(200, 100));
+        this.add(imageTitre);
+
     }
 
     @Override
