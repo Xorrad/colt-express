@@ -40,6 +40,7 @@ public class VueCommandes extends JPanel implements Observer {
         this.panelCommandes = new JPanel();
         this.panelCommandes.setOpaque(false);
         this.panelCommandes.setVisible(false);
+        this.panelCommandes.add(Box.createRigidArea(new Dimension(397, 100)));
 
         this.panelCommandesBandit = new JPanel();
         this.panelCommandesBandit.setOpaque(false);
@@ -171,7 +172,7 @@ public class VueCommandes extends JPanel implements Observer {
             this.panelCommandes.setVisible(true);
             this.panelCommandesBandit.setVisible(false);
 
-            this.labelNom.setVisible(false);
+            this.labelNom.setText("     ");
             this.labelPhase.setText("Phase de jeu");
         }
 
