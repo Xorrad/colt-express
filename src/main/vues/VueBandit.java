@@ -56,9 +56,18 @@ public class VueBandit extends JPanel implements Observer {
         // Image de fond (cadre)
         JImage imageCadre = new JImage(Assets.IMG_CADRE);
         imageCadre.setLayout(new GridBagLayout());
+//        imageCadre.setPreferredSize(new Dimension(
+//                Math.max(this.getWidth(), Assets.IMG_ACTIONS_BRAQUE.getWidth()*5 + 20),
+//                200
+//        ));
 
         this.panelInfo = new JPanel();
         this.panelInfo.setOpaque(false);
+        this.panelInfo.setPreferredSize(new Dimension(
+                Math.max(this.getWidth(), Assets.IMG_ACTIONS_BRAQUE.getWidth()*3 + 20),
+                100
+        ));
+
         this.panelActions = new JPanel();
         this.panelActions.setOpaque(false);
 
@@ -93,7 +102,10 @@ public class VueBandit extends JPanel implements Observer {
         imageCadre.add(this.panelInfo, c);
 
         // Actions du joueur
-        this.panelActions.setPreferredSize(new Dimension(this.getWidth(), Assets.IMG_ACTIONS_BRAQUE.getHeight() + 10));
+        this.panelActions.setPreferredSize(new Dimension(
+                Math.max(this.getWidth(), Assets.IMG_ACTIONS_BRAQUE.getWidth()*3 + 20),
+                Assets.IMG_ACTIONS_BRAQUE.getHeight() + 10)
+        );
         this.panelActions.setBorder(new CompoundBorder(
                 new EmptyBorder(0, 10, 0, 10),
                 new CompoundBorder(
