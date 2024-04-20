@@ -26,20 +26,30 @@ public class Bandit extends Entite {
         this.nombreBalles = 5;
         this.tresors = new ArrayList<>();
         this.actions = new Stack<Action>();
+        this.image = Assets.IMG_BANDIT;
+        this.initImage();
+    }
+
+    public Bandit(int num, Toigon toigon, String nom, BufferedImage image) {
+        super(num, toigon, Entite.Type.BANDIT);
+        this.nom = nom;
+        this.nombreBalles = 5;
+        this.tresors = new ArrayList<>();
+        this.actions = new Stack<Action>();
+        this.image = image;
         this.initImage();
     }
 
     private void initImage() {
-        if(Assets.IMG_BANDIT == null) {
-            this.image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+        if(this.image == null)
             return;
-        }
 
         // Fait une copie profonde de l'image de bandit.
-        this.image = new BufferedImage(Assets.IMG_BANDIT.getWidth(), Assets.IMG_BANDIT.getHeight(), Assets.IMG_BANDIT.getType());
-        Graphics2D g2d = this.image.createGraphics();
-        g2d.drawImage(Assets.IMG_BANDIT, 0, 0, null);
+        BufferedImage coloredImage = new BufferedImage(this.image.getWidth(), this.image.getHeight(), this.image.getType());
+        Graphics2D g2d = coloredImage.createGraphics();
+        g2d.drawImage(this.image, 0, 0, null);
         g2d.dispose();
+        this.image = coloredImage;
 
         Color c = getColor();
         int darkness = 80;

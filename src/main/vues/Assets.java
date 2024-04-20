@@ -3,14 +3,21 @@ package main.vues;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.nio.Buffer;
+import java.util.HashMap;
 
 public class Assets {
 
+    public static HashMap<String, BufferedImage> BANDITS;
+
     public static BufferedImage IMG_BG;
     public static BufferedImage IMG_CADRE;
-    public static BufferedImage IMG_BANDIT;
     public static BufferedImage IMG_BALLE;
     public static BufferedImage IMG_TITRE;
+
+    public static BufferedImage IMG_BANDIT;
+    public static BufferedImage IMG_SHERIFF;
 
     public static BufferedImage IMG_ACTIONS_BRAQUE;
     public static BufferedImage IMG_ACTIONS_ETAGES;
@@ -29,9 +36,11 @@ public class Assets {
         try {
             IMG_BG = ImageIO.read(Assets.class.getResource("/resources/images/background.png"));
             IMG_CADRE = ImageIO.read(Assets.class.getResource("/resources/images/cadre.png"));
-            IMG_BANDIT = ImageIO.read(Assets.class.getResource("/resources/images/bandit.png"));
             IMG_BALLE = ImageIO.read(Assets.class.getResource("/resources/images/balle.png"));
             IMG_TITRE = ImageIO.read(Assets.class.getResource("/resources/images/titre.png"));
+
+            IMG_BANDIT = ImageIO.read(Assets.class.getResource("/resources/images/bandit.png"));
+            IMG_SHERIFF = ImageIO.read(Assets.class.getResource("/resources/images/sheriff.png"));
 
             IMG_ACTIONS_BRAQUE = ImageIO.read(Assets.class.getResource("/resources/images/action_braque.png"));
             IMG_ACTIONS_ETAGES = ImageIO.read(Assets.class.getResource("/resources/images/action_etages.png"));
@@ -50,6 +59,28 @@ public class Assets {
             ge.registerFont(FONT_RIOGRANDE);
         }
         catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        Assets.chargeBandits();
+    }
+
+    public static void chargeBandits() {
+        BANDITS = new HashMap<>();
+
+        try {
+            File dir = new File(Assets.class.getResource("/resources/images/bandits/").getFile());
+            for (File file : dir.listFiles()) {
+                if (file.isDirectory() || !file.getName().endsWith(".png"))
+                    continue;
+                String banditName = file.getName();
+                // Capitalise la premier lettre et retire le ".png"
+                banditName = Character.toUpperCase(banditName.charAt(0)) + banditName.substring(1, banditName.length() - 4);
+                BANDITS.put(banditName, ImageIO.read(file));
+                System.out.println(banditName + " " + BANDITS.get(banditName));
+            }
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }

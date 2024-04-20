@@ -59,7 +59,8 @@ public class VueTrain extends JPanel implements Observer {
         ArrayList<Sheriff> sheriffs = toigon.getEntites(Entite.Type.SHERIFF);
         for(int i = 0; i < sheriffs.size(); i++) {
             g.setColor(Color.YELLOW);
-            g.fillRect(x + LARGEUR_WAGON - (i+1)*30, y + HAUTEUR_WAGON/2 - 15, 30, 30);
+            g.drawImage(Assets.IMG_SHERIFF, x + i*42 + 2, y + 8, 40, 40, this);
+            //g.fillRect(x + LARGEUR_WAGON - (i+1)*30, y + HAUTEUR_WAGON/2 - 15, 30, 30);
         }
     }
 }
