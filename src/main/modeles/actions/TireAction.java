@@ -39,7 +39,7 @@ public class TireAction extends Action {
     @Override
     public void apply(Bandit bandit) {
         if(!this.canApply(bandit)) {
-            System.out.println(bandit.getNom() + "ne peut pas tirer.");
+            System.out.println(bandit.getNom() + " ne peut pas tirer.");
             return;
         }
         bandit.setNombreBalles(bandit.getNombreBalles()-1);
@@ -47,7 +47,12 @@ public class TireAction extends Action {
         ArrayList<Bandit> bandits = bandit.getToigon().getVoisin(this.dir).getEntites(Entite.Type.BANDIT);
         for(int i = 0; i < bandits.size(); i++) {
             Tresor tresor = bandits.get(i).deposeRandomTresor();
-            System.out.println(bandits.get(i).getNom()+" se fait tirer dessus par +"+ bandit.getNom()+ " et lâche un(e) "+ tresor.getNom()+" qui vaut "+ tresor.getNom()+".");
+            if (tresor==null){
+                System.out.println(bandits.get(i).getNom()+" se fait tirer dessus par "+ bandit.getNom()+ " mais il ne portait rien.");
+            }
+            else{
+                System.out.println(bandits.get(i).getNom()+" se fait tirer dessus par "+ bandit.getNom()+ " et lâche un(e) "+ tresor.getNom()+" qui vaut $"+ tresor.getValeur()+".");
+            }
         }
     }
 
