@@ -26,7 +26,7 @@ public class Sheriff extends Entite {
             for(int i = 0; i < bandits.size(); i++) {
                 if ((!bandits.get(i).getToigon().estToit()) && (bandits.get(i).possedeTresor())){
                     Tresor tresor = bandits.get(i).deposeRandomTresor();
-                    System.out.println("Le Shériff force "+bandits.get(i).getNom()+" à lâché un(e)"+" qui vaut: "+tresor.getValeur()+".");
+                    System.out.println("Le Shériff force "+bandits.get(i).getNom()+" à lâcher un(e)"+" qui vaut: "+tresor.getValeur()+".");
                     bandits.get(i).deplace(Direction.HAUT);
                 } else if ((!bandits.get(i).getToigon().estToit())) {
                     System.out.println("Le Shériff force "+bandits.get(i).getNom()+" à s'échapper sur le toit.");
