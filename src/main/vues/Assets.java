@@ -1,10 +1,15 @@
 package main.vues;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.SequenceInputStream;
 import java.util.HashMap;
 
 public class Assets {
@@ -32,14 +37,19 @@ public class Assets {
     public static Font FONT_WESTERNBANG;
     public static Font FONT_RIOGRANDE;
 
+    // Les musiques sont fusionnées dans un même flux qui est joué à l'infini.
+    public static AudioInputStream AUDIO_MUSIQUES;
+
     // Initialise la table des bandits statiquement car les assets ne sont pas
     // chargés lors de l'execution des tests.
     static {
         BANDITS = new HashMap<>();
+        AUDIO_MUSIQUES = null;
     }
 
     public static void chargeAssets() {
         Assets.chargeBandits();
+        Assets.chargeMusiques();
 
         try {
             IMG_BG = loadImage("background.png");
@@ -78,12 +88,18 @@ public class Assets {
                 // Capitalise la premier lettre et retire le ".png"
                 banditName = Character.toUpperCase(banditName.charAt(0)) + banditName.substring(1, banditName.length() - 4);
                 BANDITS.put(banditName, ImageIO.read(file));
-                System.out.println(banditName + " " + BANDITS.get(banditName));
             }
         }
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void chargeMusiques() {
+        loadMusique("outlaw-ride.wav");
+        loadMusique("desert-monolith.wav");
+        loadMusique("cactus-train.wav");
+        loadMusique("desert-monolith.wav");
     }
 
     public static BufferedImage loadImage(String nom) throws IOException {
@@ -97,4 +113,24 @@ public class Assets {
         return font;
     }
 
+    public static void loadMusique(String nom) {
+        try {
+            // On charge le fichier audio dans un flux
+            // puis on ajoute ce flux à la bande de musique existante.
+            AudioInputStream flux = AudioSystem.getAudioInputStream(Assets.class.getResource("/resources/musics/" + nom));
+
+            if(AUDIO_MUSIQUES == null) {
+                AUDIO_MUSIQUES = flux;
+            }
+            else {
+                AUDIO_MUSIQUES = new AudioInputStream(
+                        new SequenceInputStream(AUDIO_MUSIQUES, flux),
+                        AUDIO_MUSIQUES.getFormat(),
+                        AUDIO_MUSIQUES.getFrameLength() + AUDIO_MUSIQUES.getFrameLength()
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

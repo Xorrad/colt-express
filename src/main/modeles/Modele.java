@@ -5,6 +5,9 @@ import main.modeles.entites.Sheriff;
 import main.modeles.entites.Tresor;
 import main.vues.Assets;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.awt.image.BufferedImage;
 import java.util.*;
 
@@ -28,6 +31,7 @@ public class Modele extends Observable {
         this.initBandits();
         this.initSheriffs();
         this.initTresors();
+        this.joueMusique();
     }
 
     private void initTrain(){
@@ -115,6 +119,16 @@ public class Modele extends Observable {
         Toigon locomotive = this.getLocomotive();
         Tresor tresor = new Tresor(numTresor, locomotive, "Magot", 1000);
         locomotive.ajouteEntite(tresor);
+    }
+
+    private void joueMusique() {
+        try {
+            Clip clip = AudioSystem.getClip();
+            clip.open(Assets.AUDIO_MUSIQUES);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public Toigon[] getTrain() {
