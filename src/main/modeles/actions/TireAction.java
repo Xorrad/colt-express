@@ -45,14 +45,12 @@ public class TireAction extends Action {
         bandit.setNombreBalles(bandit.getNombreBalles()-1);
 
         ArrayList<Bandit> bandits = bandit.getToigon().getVoisin(this.dir).getEntites(Entite.Type.BANDIT);
-        for(int i = 0; i < bandits.size(); i++) {
-            Tresor tresor = bandits.get(i).deposeRandomTresor();
-            if (tresor==null){
-                System.out.println(bandits.get(i).getNom()+" se fait tirer dessus par "+ bandit.getNom()+ " mais il ne portait rien.");
-            }
-            else{
-                System.out.println(bandits.get(i).getNom()+" se fait tirer dessus par "+ bandit.getNom()+ " et lâche un(e) "+ tresor.getNom()+" qui vaut $"+ tresor.getValeur()+".");
-            }
+        for(Bandit b : bandits) {
+            Tresor tresor = b.deposeRandomTresor();
+            if(tresor != null)
+                System.out.println(b.getNom()+" se fait tirer dessus par " + bandit.getNom() + " et lâche un(e) "+ tresor.getNom()+" qui vaut $"+ tresor.getValeur()+".");
+            else
+                System.out.println(b.getNom()+" se fait tirer dessus par " + bandit.getNom() + " mais n'a pas de trésor.");
         }
     }
 
