@@ -40,7 +40,7 @@ public class VueCommandes extends JPanel implements Observer {
         this.panelCommandes = new JPanel();
         this.panelCommandes.setOpaque(false);
         this.panelCommandes.setVisible(false);
-        this.panelCommandes.add(Box.createRigidArea(new Dimension(397, 100)));
+        this.panelCommandes.add(Box.createRigidArea(new Dimension(264, 100)));
 
         this.panelCommandesBandit = new JPanel();
         this.panelCommandesBandit.setOpaque(false);
@@ -56,7 +56,7 @@ public class VueCommandes extends JPanel implements Observer {
         this.labelPhase.setForeground(new Color(207, 178, 47));
         panelInfo.add(this.labelPhase);
 
-        JIcon boutonContinuer = new JIcon(Assets.IMG_ACTIONS_INCONNUE, 1);
+        JIcon boutonContinuer = new JIcon(Assets.IMG_ACTIONS_NEXT, 1);
         boutonContinuer.addMouseListener(new ContinuerController(modele));
         boutonContinuer.addMouseListener(new BoutonAnimationController(boutonContinuer));
         this.panelCommandes.add(boutonContinuer);
@@ -133,7 +133,7 @@ public class VueCommandes extends JPanel implements Observer {
 
         this.panelCommandesBandit.add(panelTir);
 
-        JIcon boutonFin = new JIcon(Assets.IMG_ACTIONS_INCONNUE, 1);
+        JIcon boutonFin = new JIcon(Assets.IMG_ACTIONS_OK, 1);
         boutonFin.addMouseListener(new FinTourController(modele));
         boutonFin.addMouseListener(new BoutonAnimationController(boutonFin));
         this.panelCommandesBandit.add(boutonFin);

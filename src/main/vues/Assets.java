@@ -27,6 +27,8 @@ public class Assets {
     public static BufferedImage IMG_BANDIT;
     public static BufferedImage IMG_SHERIFF;
 
+    public static BufferedImage IMG_ACTIONS_NEXT;
+    public static BufferedImage IMG_ACTIONS_OK;
     public static BufferedImage IMG_ACTIONS_BRAQUE;
     public static BufferedImage IMG_ACTIONS_ETAGES;
     public static BufferedImage IMG_ACTIONS_MOVE_ARRIERE;
@@ -68,15 +70,17 @@ public class Assets {
             IMG_BANDIT = loadImage("bandit.png");
             IMG_SHERIFF = loadImage("sheriff.png");
 
-            IMG_ACTIONS_BRAQUE = loadImage("action_braque.png");
-            IMG_ACTIONS_ETAGES = loadImage("action_etages.png");
-            IMG_ACTIONS_MOVE_ARRIERE = loadImage("action_move_arriere.png");
-            IMG_ACTIONS_MOVE_AVANT = loadImage("action_move_avant.png");
-            IMG_ACTIONS_TIRE_ARRIERE = loadImage("action_tire_arriere.png");
-            IMG_ACTIONS_TIRE_AVANT = loadImage("action_tire_avant.png");
-            IMG_ACTIONS_TIRE_BAS = loadImage("action_tire_bas.png");
-            IMG_ACTIONS_TIRE_HAUT = loadImage("action_tire_haut.png");
-            IMG_ACTIONS_INCONNUE = loadImage("action_inconnue.png");
+            IMG_ACTIONS_NEXT = loadImage("actions/action_next.png");
+            IMG_ACTIONS_OK = loadImage("actions/action_ok.png");
+            IMG_ACTIONS_BRAQUE = loadImage("actions/action_braque.png");
+            IMG_ACTIONS_ETAGES = loadImage("actions/action_etages.png");
+            IMG_ACTIONS_MOVE_ARRIERE = loadImage("actions/action_move_arriere.png");
+            IMG_ACTIONS_MOVE_AVANT = loadImage("actions/action_move_avant.png");
+            IMG_ACTIONS_TIRE_ARRIERE = loadImage("actions/action_tire_arriere.png");
+            IMG_ACTIONS_TIRE_AVANT = loadImage("actions/action_tire_avant.png");
+            IMG_ACTIONS_TIRE_BAS = loadImage("actions/action_tire_bas.png");
+            IMG_ACTIONS_TIRE_HAUT = loadImage("actions/action_tire_haut.png");
+            IMG_ACTIONS_INCONNUE = loadImage("actions/action_inconnue.png");
 
             FONT_WESTERNBANG = loadFont("WesternBangBang-Regular.ttf");
             FONT_RIOGRANDE = loadFont("RioGrande.ttf");
