@@ -16,8 +16,8 @@
 ## Introduction
 Projet de POGL pour l'année 2023-2024 sur le jeu de société [Colt Express](https://www.ludonaute.fr/en/product/colt-express/)
 réalisé par:
-- Aymeric Emond <aymeric.emond@universite-paris-saclay.fr>
-- Tristan Hartmann-Baudry  <tristan.hartmann-baudry@universite-paris-saclay.fr>
+- Aymeric Emond <<aymeric.emond@universite-paris-saclay.fr>>
+- Tristan Hartmann-Baudry  <<tristan.hartmann-baudry@universite-paris-saclay.fr>>
 
 
 ## Fonctionnalités
