@@ -22,6 +22,7 @@ public class Vue implements Observer {
         this.frame.setTitle("Colt Express");
         this.frame.setLayout(new BoxLayout(this.frame.getContentPane(), BoxLayout.Y_AXIS)); // Elements l'un au dessus de l'autre
         this.frame.setBackground(new Color(248, 248, 132));
+        this.frame.setResizable(false);
 
         // Les components sont structurés de la façon suivante:
         // JFrame:
