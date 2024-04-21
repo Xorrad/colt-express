@@ -6,6 +6,7 @@ import main.modeles.Toigon;
 import main.modeles.entites.Entite;
 import main.modeles.entites.Sheriff;
 import main.modeles.entites.Tresor;
+import main.vues.Assets;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -53,7 +54,7 @@ public class Tests {
     public void testToigon() {
         Modele m = new Modele();
         Toigon toigon = m.getToigon(2);
-        Tresor tresor = new Tresor(0, toigon, "Bijou", 500);
+        Tresor tresor = new Tresor(0, toigon, "Bijoux", 500, Assets.IMG_TRESORS_BIJOUX);
 
         assertFalse(toigon.contientEntite(tresor));
         toigon.ajouteEntite(tresor);

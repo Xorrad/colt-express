@@ -119,7 +119,7 @@ public class Modele extends Observable {
 
         // Ajoute le magot de $1000 dans la locomotive.
         Toigon locomotive = this.getLocomotive();
-        Tresor tresor = new Tresor(numTresor, locomotive, "Magot", 1000);
+        Tresor tresor = new Tresor(numTresor, locomotive, "Magot", 1000, Assets.IMG_TRESORS_MAGOT);
         locomotive.ajouteEntite(tresor);
     }
 

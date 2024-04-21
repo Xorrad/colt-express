@@ -27,6 +27,10 @@ public class Assets {
     public static BufferedImage IMG_BANDIT;
     public static BufferedImage IMG_SHERIFF;
 
+    public static BufferedImage IMG_TRESORS_BOURSE;
+    public static BufferedImage IMG_TRESORS_BIJOUX;
+    public static BufferedImage IMG_TRESORS_MAGOT;
+
     public static BufferedImage IMG_ACTIONS_NEXT;
     public static BufferedImage IMG_ACTIONS_OK;
     public static BufferedImage IMG_ACTIONS_BRAQUE;
@@ -69,6 +73,10 @@ public class Assets {
 
             IMG_BANDIT = loadImage("bandit.png");
             IMG_SHERIFF = loadImage("sheriff.png");
+
+            IMG_TRESORS_BOURSE = loadImage("tresors/bourse.png");
+            IMG_TRESORS_BIJOUX = loadImage("tresors/bijoux.png");
+            IMG_TRESORS_MAGOT = loadImage("tresors/magot.png");
 
             IMG_ACTIONS_NEXT = loadImage("actions/action_next.png");
             IMG_ACTIONS_OK = loadImage("actions/action_ok.png");
