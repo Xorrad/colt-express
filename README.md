@@ -8,7 +8,7 @@
 ## Sommaire
 
 - [Introduction](#introduction)
-- [Parties traitées](#parties-traitées)
+- [Fonctionnalités](#fonctionnalités)
 - [Difficultés](#difficultes)
 - [Diagramme UML](#diagramme-uml)
 - [Utilisation](#utilisation)
@@ -20,7 +20,7 @@ réalisé par:
 - Tristan Hartmann-Baudry  <tristan.hartmann-baudry@universite-paris-saclay.fr>
 
 
-## Parties traitées
+## Fonctionnalités
 
 
 ## Difficultés
