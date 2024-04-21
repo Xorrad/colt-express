@@ -1,5 +1,6 @@
 package main.vues;
 
+import main.Assets;
 import main.controlleurs.*;
 import main.modeles.Direction;
 import main.modeles.Modele;
@@ -15,7 +16,6 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class VueCommandes extends JPanel implements Observer {
     private Modele modele;

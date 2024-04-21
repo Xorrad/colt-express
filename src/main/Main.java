@@ -1,12 +1,9 @@
 package main;
 
 import main.modeles.Modele;
-import main.vues.Assets;
 import main.vues.Vue;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Stack;
 
 public class Main {
 

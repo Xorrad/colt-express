@@ -4,7 +4,7 @@ import main.modeles.Direction;
 import main.modeles.Modele;
 import main.modeles.Toigon;
 import main.modeles.actions.Action;
-import main.vues.Assets;
+import main.Assets;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

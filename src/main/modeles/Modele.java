@@ -3,7 +3,7 @@ package main.modeles;
 import main.modeles.entites.Bandit;
 import main.modeles.entites.Sheriff;
 import main.modeles.entites.Tresor;
-import main.vues.Assets;
+import main.Assets;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;

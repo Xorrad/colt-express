@@ -1,7 +1,7 @@
 package main.modeles.entites;
 
 import main.modeles.Toigon;
-import main.vues.Assets;
+import main.Assets;
 
 import java.awt.*;
 import java.util.Random;

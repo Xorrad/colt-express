@@ -3,7 +3,7 @@ package main.modeles.actions;
 import main.modeles.entites.Bandit;
 import main.modeles.entites.Entite;
 import main.modeles.entites.Tresor;
-import main.vues.Assets;
+import main.Assets;
 
 import java.awt.*;
 

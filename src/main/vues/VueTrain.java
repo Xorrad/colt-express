@@ -1,5 +1,6 @@
 package main.vues;
 
+import main.Assets;
 import main.modeles.Modele;
 import main.modeles.Toigon;
 import main.modeles.entites.Bandit;

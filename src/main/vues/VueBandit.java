@@ -1,22 +1,16 @@
 package main.vues;
 
-import main.controlleurs.ActionController;
+import main.Assets;
 import main.controlleurs.BoutonAnimationController;
-import main.controlleurs.FinTourController;
 import main.controlleurs.RetirerActionController;
-import main.modeles.Direction;
 import main.modeles.Modele;
 import main.modeles.Phase;
 import main.modeles.actions.Action;
-import main.modeles.actions.BraqueAction;
-import main.modeles.actions.ChangeEtageAction;
-import main.modeles.actions.ChangeWagonAction;
 import main.modeles.entites.Bandit;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
 

@@ -6,7 +6,7 @@ import main.modeles.Toigon;
 import main.modeles.entites.Entite;
 import main.modeles.entites.Sheriff;
 import main.modeles.entites.Tresor;
-import main.vues.Assets;
+import main.Assets;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
