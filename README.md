@@ -101,7 +101,19 @@ d'un bruit ambiant de desert. En plus de cette bande son, il y a un bruit de rai
 qui est joué en parallèle.
 
 ## Difficultés
+La principale difficulté que nous avons rencontrée était de se coordonner
+efficacement sur les différentes tâches et objectifs à atteindre, donc d'organisation.
+C'est-à-dire que nous avons tous deux écrit plus ou moins le même code en parallèle sans
+en avoir conscience, et évidemment à terme, un seul n'est gardé, ce qui représente
+une perte de temps.  
 
+Il y avait également des problèmes de performance durant le développement, mais
+en déboguant, on a pu identifier l'origine du problème (qui était un "bug" plutôt
+qu'une mauvaise architecture/code). Depuis le jeu tourne plus ou moins correctement.
+
+Enfin, mettre en œuvre l'interface qu'on voulait fut assez fastidieux car les
+images étaient difficiles à placer correctement et se base sur quelques nombres "magiques"
+trouver "à la pipette" en testant plusieurs fois.
 
 ## Diagramme UML
 ![diagram](diagram.png)
